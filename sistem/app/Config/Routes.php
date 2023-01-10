@@ -38,6 +38,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 
 $routes->match(['get', 'post'], '/games/order/(:any)/(:any)', 'Games::order/$1/$2');
+$routes->match(['get', 'post'], '/games/send-wa', 'Games::sendWa');
 $routes->match(['get', 'post'], '/games/(:any)', 'Games::index/$1');
 $routes->match(['get', 'post'], '/syarat-ketentuan', 'Pages::sk');
 

@@ -71,6 +71,11 @@ class Konfigurasi extends BaseController {
 
                 $this->session->setFlashdata('success', 'Data konfiguasi berhasil disimpan');
                 return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+            } else if ($this->request->getPost('tombol') == 'fonnte') {
+                $this->M_Base->u_update('fonnte-token', $this->request->getPost('fonnte_token'));
+
+                $this->session->setFlashdata('success', 'Data konfiguasi berhasil disimpan');
+                return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
             } else if ($this->request->getPost('tombol') == 'sm') {
                 $this->M_Base->u_update('sm-wa', $this->request->getPost('wa'));
                 $this->M_Base->u_update('sm-ig', $this->request->getPost('ig'));
@@ -126,6 +131,7 @@ class Konfigurasi extends BaseController {
                 'secret' => $this->M_Base->u_get('ip_secret'),
             ],
             'kiosweb' => $this->M_Base->u_get('kiosweb-license'),
+            'fonnte_token' => $this->M_Base->u_get('fonnte-token'),
             'banner' => $this->M_Base->all_data('banner'),
             'page_sk' => $this->M_Base->u_get('page_sk'),
     	]);

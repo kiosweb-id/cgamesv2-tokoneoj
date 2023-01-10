@@ -17,7 +17,7 @@ chdir(FCPATH);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../cgames.kiosweb.id/sistem/app/Config/Paths.php';
+require FCPATH . 'sistem/app/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
 
 $paths = new Config\Paths();

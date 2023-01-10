@@ -303,6 +303,32 @@
 								</div>
 								</div>
 							</div>
+
+							<div class="row">
+                                 <div class="col-lg-10 mx-auto">
+                                 <!-- Tripay -->
+                                 <div class="card shadow mb-4">
+								    <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Whatsapp Gateway Fonnte</h6>
+                                    </div>
+									<div class="card-body">
+										<form action="" method="POST">
+											<div class="form-group row">
+												<label class="col-md-4 col-form-label text-dark">Token</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" value="<?= $fonnte_token; ?>" name="fonnte_token" autocomplete="off">
+													<small>Hubungi <a href="https://wa.me/6285293026542">developer</a> untuk mendapatkan token</small>
+												</div>
+											</div>
+											<div class="text-right">
+												<button class="btn text-dark" type="reset">Batal</button>
+												<button class="btn btn-primary" type="submit" name="tombol" value="fonnte">Simpan</button>
+											</div>
+										</form>
+									</div>
+								</div>
+								</div>
+							</div>
 							
 							<div class="row">
                                  <div class="col-lg-10 mx-auto">

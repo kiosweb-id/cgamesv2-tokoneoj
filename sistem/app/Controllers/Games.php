@@ -8,7 +8,6 @@ class Games extends BaseController {
 
         if ($slug) {
             $games = $this->M_Base->data_where('games', 'slug', $slug);
-
             if (count($games) === 1) {
                 if ($games[0]['slug'] === $slug) {
 
@@ -374,6 +373,17 @@ class Games extends BaseController {
                                                 'date_process' => date('Y-m-d G:i:s'),
                                             ]);
 
+                                            $data_wa = [
+                                                'wa' => $data_post['wa'],
+                                                'order_id' => $order_id,
+                                                'product' => $product[0]['product'],
+                                                'total_price' => $price * $quantity,
+                                                'method' => $method[0]['method'],
+                                                'nickname' => $data_post['username'],
+                                            ];
+
+                                            $this->sendWa($data_post['wa'], $data_wa);
+
                                             $this->session->setFlashdata('success', 'Pesanan berhasil dibuat');
                                             return redirect()->to(base_url() . '/payment/' . $order_id);
 
@@ -525,7 +535,8 @@ class Games extends BaseController {
                                     $gtarget = $data_post['user_id'];
                                 }
 
-                                $result = self::fetch('https://api.kiosweb.id/api/v1/check-game', [
+                                // https://alfathan.my.id/api/game/aov/?id=xxxxx&key=xxxxx
+                                $result = self::fetch('https://alfathan.my.id/api/game', [
                                         'api_key' => $this->M_Base->u_get('kiosweb-license'),
                                         'game'    => $games[0]['check_code'],
                                         'user_id' => $data_post['user_id'],
@@ -533,16 +544,14 @@ class Games extends BaseController {
                                 ]);
               
                                 
-                                if ($result) {
+                                if (isset($result->result)) {
                                     // echo json_encode($result);
                                     // exit;
                                     
-                                 
-                                    
-                                    if ($result->code == 200) {
+                                    if ($result->result->status == 200) {   
                                         $gusername = "ID Akun tidak ditemukan";
-                                        if (isset($result->result->username) && $result->result->username != '') {
-                                            $gusername = urldecode($result->result->username);
+                                        if (isset($result->nickname) && $result->nickname != '') {
+                                            $gusername = $result->nickname;
                                         }
                                         
                                         echo json_encode([
@@ -683,16 +692,42 @@ class Games extends BaseController {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
+
+    public function sendWa($target = null, $data_wa = null) 
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array(
+                'target' => $target,
+                'message' => "Halo kak, \r\nBerikut adalah rincian pesanan Anda:\r\n- Produk : " . $data_wa['product'] . " \r\n- No.Invoice : " . $data_wa['order_id'] . " \r\n- Total Tagihan : " . $data_wa['total_bayar'] . " \r\n- Metode Pembayaran : " . $data_wa['method'] ."\r\n Cek pesanan anda di sini ". base_url() . "/payment"  ."\r\nTerima kasih.",
+                'countryCode' => '62', //optional
+            ),
+            CURLOPT_HTTPHEADER => [
+                'Authorization:  ' . $this->M_Base->u_get('fonnte-token') . '' //change TOKEN to your actual token
+            ],
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+    }
     
     public static function fetch($url, $data) 
     {
+        $game = str_replace(' ', '', strtolower($data['game']));
    		
-   		$ch = curl_init();
-
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_HTTPHEADER,['Content-Type: application/x-www-form-urlencoded']);
-        curl_setopt($ch,CURLOPT_POST,true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query($data));
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL, 'https://alfathan.my.id/api/game/'. $game .'/?id='. $data['user_id'] .'&zone='. $data['zone_id'] .'&key=' . $data['api_key']);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
         
@@ -702,8 +737,6 @@ class Games extends BaseController {
         
         $result = json_decode($response);
         
-        return $result;
-   		
-   		
+        return $result;	
     }
 }
