@@ -377,7 +377,7 @@ class Games extends BaseController {
                                                 'wa' => $data_post['wa'],
                                                 'order_id' => $order_id,
                                                 'product' => $product[0]['product'],
-                                                'total_price' => $price * $quantity,
+                                                'total_bayar' => $price * $quantity,
                                                 'method' => $method[0]['method'],
                                                 'nickname' => $data_post['username'],
                                             ];
