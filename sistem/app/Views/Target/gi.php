@@ -4,10 +4,10 @@
     </div>
     <div class="col">
         <select name="zone_id" class="form-control">
-            <option value="america">America</option>
-            <option value="europe">Europe</option>
-            <option value="asia">Asia</option>
-            <option value="tw_hk_mo">TW, HK, MO</option>
+            <option value="os_asia">Asia</option>
+            <option value="os_euro">Europe</option>
+            <option value="os_usa">Amerika</option>
+            <option value="os_cht">TW, HK, MO</option>
         </select>
     </div>
     <p class="col-12 mt-2 d-none" style="font-size: 10px">Untuk mengetahui User ID Anda, silahkan klik menu profile dibagian kiri atas pada menu utama game. User ID akan terlihat dibagian bawah Nama karakter game Anda. Silahkan masukan User ID dan Server ID Anda untuk menyelesaikan transaksi. <b>Contoh: 12345678(1234)</b>. </p>

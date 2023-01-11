@@ -30,7 +30,7 @@
                                 <div class="section">
                                     <div class="card-body shadow">
                                         <div class="text-white text-center position-absolute num-page">1</div>
-                                        <h5 style="margin-left: 55px; margin-top: 10px;">Input Data Game</h5>
+                                        <h5 style="margin-left: 55px; margin-top: 10px;">Lengkapi Data</h5>
                                         <?= $this->include('Target/' . $games['target']); ?>
                                     </div>
                                 </div>
@@ -56,20 +56,22 @@
                                                 <label for="product-<?= $loop['id']; ?>">
                                                     <div class="row">
                                                         <div class="col">
-                                                            <div class="row">
-                                                                <div class="col fw-bold"><?= $loop['product']; ?></div>
-                                                            </div>
+                                                        <div id="product-236" class="pt-2 pb-2 pe-2 ps-3 cursor-pointer product-list active" onclick="select_product('236');">
+                                                            <table class="w-100">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="pe-1">
+                                                                            <b class="d-block fw-bold"><?= $loop['product']; ?></b>
+                                                                            <span>Rp <?= $loop['price']; ?>,-</span>
+                                                                        </td>
+                                                                        <td class="text-end">
+                                                                            <img src="<?= $loop['logo_url'] ?>" alt="" width="28">
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                        <tr>
-                                                        <div class="col">
-                                                            <div class="row">
-                                                                <div class="col fw-bold">Rp <?= $loop['price']; ?>,-</div>
-                                                            </div>
-                                                        </div>
-                                                        </tr>
-                                                        <div class="col-lg-3 col-1 m-auto">
-                                                            <img src="<?= $loop['logo_url'] ?>" width="32" <?php if (!empty($loop['logo_url'])) { ?> style="margin-top: 0px; margin-bottom: 0px; margin-right: 0px; margin-left: -35px;" <?php } ?>>
-                                                        </div>
+                                                    </div>
                                                     </div>
                                                     </label>
                                                 

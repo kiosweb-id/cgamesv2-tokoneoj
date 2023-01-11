@@ -25,9 +25,10 @@
 
         <style>
             :root {
-                --warna: #0F044C;
-                --warna_2: #141E61;
-                --warna_3: #fd7300;
+                --warna: #38084a;
+                --warna_2: #510b65;
+                --warna_3: #ff9800;
+                --warna_4: #141E61;
             }
             .content {
                 padding-top: 110px;
@@ -42,6 +43,9 @@
                 text-transform: none;
                 color: #fff;
             }
+            .fw-bold {
+                font-weight: 600;
+            }
             .col-form-label {
                 padding-top: calc(.375rem + 3px);
             }
@@ -51,6 +55,24 @@
             }
             .cursor-pointer {
                 cursor: pointer;
+            }
+            .category a {
+                display: inline-block;
+                text-decoration: none;
+                font-size: 14px;
+                color: #fff;
+                border: 1px solid var(--warna_2);
+                width: 100%;
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 6px;
+            }
+            .category a.active {
+                background: var(--warna_2);
+            }
+            .category a img {
+                width: 26px;
+                margin-right: 10px;
             }
             .menu-user a {
                 padding: 10px 16px;
@@ -366,8 +388,8 @@
                     
                     setTimeout(function () {
                         $("#modal-popup").modal('hide');
-                    }, 30000);
-                }, 2000);
+                    }, 15000);
+                }, 1000);
             });
         </script>
 

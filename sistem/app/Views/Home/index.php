@@ -12,7 +12,7 @@
                             <li data-target="#carouselExampleIndicators" data-slide-to="<?= $no; ?>" <?= $no == 0 ? 'class="active"' : ''; ?>></li>
                             <?php $no++; endforeach ?>
                         </ol>
-                        <div class="carousel-inner" style="border-radius: 16px;">
+                        <div class="carousel-inner" style="border-radius: 10px;">
                             <?php $no = 1; foreach ($banner as $loop): ?>
                             <div class="carousel-item <?= $no == 1 ? 'active' : ''; ?>">
                                 <img class="d-block w-100" src="<?= base_url(); ?>/assets/images/banner/<?= $loop['image']; ?>" alt="First slide">
@@ -41,8 +41,11 @@
             <?php foreach ($games as $game): ?>
             <div class="container pt-4 pb-4" id="<?= url_title($game['category'], '-', true); ?>">
                 <div class="row">
-                    <div class="col-12">
-                        <h5><?= $game['category']; ?></h5>
+                    <div class="col-12 col-md-3 category">
+                        <a id="<?= url_title($game['category'], '-', true); ?>" class="cursor-pointer active" onclick="select_tipe('mobile-legends');">
+                            <img src="https://javagamestore.com/assets/tipe/1671701360_204521123dc06d4c9df8.png" alt="">
+                            <?= $game['category']; ?> 
+                        </a>
                     </div>
                 </div>
             </div>
@@ -54,7 +57,7 @@
                             <div class="col-md-3 col-4 text-center">
                                 <a href="<?= base_url(); ?>/games/<?= $loop['slug']; ?>" class="text-decoration-none mb-4 d-block">
                                     <img src="<?= base_url(); ?>/assets/images/games/<?= $loop['image']; ?>" alt="" class="w-100 rounded">
-                                        <img src="<?= base_url(); ?>/assets/waves.svg" alt="" class="w-100" style="margin-top: -30px;">
+                                        <img src="<?= base_url(); ?>/assets/waves.png" alt="" class="w-100" style="margin-top: -30px;">
                                     <div style="background: var(--warna_2);margin-top: -22px;min-height: 64px;" class="rounded-bottom text-center py-2">
                                         <p class="mb-0 fs-14"> <?= $loop['games']; ?> </p>
                                     </div>
@@ -71,7 +74,7 @@
             
             <div class="modal fade" id="modal-popup" tabindex="-1" aria-labelledby="modal-popupLabel" aria-modal="true" role="dialog" style="display: block;">
                 <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                    <div class="modal-content" style="background: var(--warna_4);">
+                    <div class="modal-content" style="background: var(--warna_5);">
                     <div class="modal-body">
                         <p><img width="100%" alt="" src="https://i.postimg.cc/t43W42yt/cgames.png" style="height:100%; width:100%"></p>
                         <a id="promoClose" value="Close" href="#">×</a>
