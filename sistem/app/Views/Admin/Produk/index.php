@@ -24,7 +24,9 @@
     												<th width="10">No</th>
     												<th>Games</th>
     												<th>Produk</th>
-    												<th>Harga</th>
+    												<th>Harga Member</th>
+    												<th>Harga Reller</th>
+    												<th>Harga VIP</th>
     												<th>Status</th>
     												<th>Action</th>
     											</tr>
@@ -34,7 +36,9 @@
                                                     <th width="10">No</th>
     												<th>Games</th>
     												<th>Produk</th>
-    												<th>Harga</th>
+    												<th>Harga Member</th>
+    												<th>Harga Reller</th>
+    												<th>Harga VIP</th>
     												<th>Status</th>
     												<th>Action</th>
                                                 </tr>
@@ -46,6 +50,8 @@
     												<td><?= $loop['games']; ?></td>
     												<td><?= $loop['product']; ?></td>
     												<td>Rp <?= number_format($loop['price'],0,',','.'); ?></td>
+    												<td>Rp <?= number_format($loop['reseller_price'],0,',','.'); ?></td>
+    												<td>Rp <?= number_format($loop['vip_price'],0,',','.'); ?></td>
     												<td><?= $loop['status']; ?></td>
     												<td class="d-sm-flex p-2">
     													<a href="<?= base_url(); ?>/admin/metode/price/<?= $loop['id']; ?>" class="btn btn-success btn-sm mr-2">Kostum Harga</a>

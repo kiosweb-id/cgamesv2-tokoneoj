@@ -126,6 +126,8 @@ class Produk extends BaseController {
                 'games_id' => addslashes(trim(htmlspecialchars($this->request->getPost('games_id')))),
                 'product' => addslashes(trim(htmlspecialchars($this->request->getPost('product')))),
                 'price' => addslashes(trim(htmlspecialchars($this->request->getPost('price')))),
+                'reseller_price' => addslashes(trim(htmlspecialchars($this->request->getPost('reseller_price')))),
+                'vip_price' => addslashes(trim(htmlspecialchars($this->request->getPost('vip_price')))),
                 'provider' => addslashes(trim(htmlspecialchars($this->request->getPost('provider')))),
                 'sku' => addslashes(trim(htmlspecialchars($this->request->getPost('sku')))),
                 'logo_url' => trim(htmlspecialchars($this->request->getPost('logo_url')))
@@ -177,6 +179,8 @@ class Produk extends BaseController {
                         'games_id' => addslashes(trim(htmlspecialchars($this->request->getPost('games_id')))),
                         'product' => addslashes(trim(htmlspecialchars($this->request->getPost('product')))),
                         'price' => addslashes(trim(htmlspecialchars($this->request->getPost('price')))),
+                        'reseller_price' => addslashes(trim(htmlspecialchars($this->request->getPost('reseller_price')))),
+                        'vip_price' => addslashes(trim(htmlspecialchars($this->request->getPost('vip_price')))),
                         'provider' => addslashes(trim(htmlspecialchars($this->request->getPost('provider')))),
                         'sku' => addslashes(trim(htmlspecialchars($this->request->getPost('sku')))),
                         'logo_url' => trim(htmlspecialchars($this->request->getPost('logo_url')))

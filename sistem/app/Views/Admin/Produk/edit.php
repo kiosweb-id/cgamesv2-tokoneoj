@@ -31,9 +31,21 @@
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-form-label col-md-4 text-dark">Harga</label>
+														<label class="col-form-label col-md-4 text-dark">Harga Member</label>
 														<div class="col-md-8">
 															<input type="number" class="form-control" autocomplete="off" name="price" value="<?= $product['price']; ?>">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Harga Reseller</label>
+														<div class="col-md-8">
+															<input type="number" class="form-control" autocomplete="off" name="reseller_price" value="<?= $product['reseller_price']; ?>">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Harga VIP</label>
+														<div class="col-md-8">
+															<input type="number" class="form-control" autocomplete="off" name="vip_price" value="<?= $product['vip_price']; ?>">
 														</div>
 													</div>
 													<div class="form-group row">

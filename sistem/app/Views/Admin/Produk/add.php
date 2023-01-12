@@ -35,9 +35,21 @@
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-form-label col-md-4 text-dark">Harga</label>
+														<label class="col-form-label col-md-4 text-dark">Harga Member</label>
 														<div class="col-md-8">
 															<input type="number" class="form-control" autocomplete="off" name="price">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Harga Reller</label>
+														<div class="col-md-8">
+															<input type="number" class="form-control" autocomplete="off" name="reseller_price">
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Harga VIP</label>
+														<div class="col-md-8">
+															<input type="number" class="form-control" autocomplete="off" name="vip_price">
 														</div>
 													</div>
 													<div class="form-group row">
