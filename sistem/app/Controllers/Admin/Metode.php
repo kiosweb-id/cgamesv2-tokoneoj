@@ -213,6 +213,47 @@ class Metode extends BaseController {
                         }
                     }
 
+                    foreach ($this->request->getPost('vip_price') as $metode => $vip_price) {
+                        $data_price = $this->M_Base->data_where_array('price', [
+                            'method_id' => $metode,
+                            'product_id' => $product[0]['id'],
+                        ]);
+
+                        if (count($data_price) == 1) {
+                            $this->M_Base->data_update('price', [
+                                'vip_price' => $vip_price,
+                            ], $data_price[0]['id']);
+                        } else {
+                            if ($product[0]['vip_price'] !== $vip_price) {
+                                $this->M_Base->data_insert('price', [
+                                    'product_id' => $product[0]['id'],
+                                    'method_id' => $metode,
+                                    'vip_price' => $vip_price,
+                                ]);
+                            }
+                        }
+                    }
+
+                    foreach ($this->request->getPost('reseller_price') as $metode => $reseller_price) {
+                        $data_price = $this->M_Base->data_where_array('price', [
+                            'method_id' => $metode,
+                            'product_id' => $product[0]['id'],
+                        ]);
+
+                        if (count($data_price) == 1) {
+                            $this->M_Base->data_update('price', [
+                                'reseller_price' => $reseller_price,
+                            ], $data_price[0]['id']);
+                        } else {
+                            if ($product[0]['reseller_price'] !== $reseller_price) {
+                                $this->M_Base->data_insert('price', [
+                                    'product_id' => $product[0]['id'],
+                                    'method_id' => $metode,
+                                    'reseller_price' => $reseller_price,
+                                ]);
+                            }
+                        }
+                    }
                     $this->session->setFlashdata('success', 'Harga produk berhasil dikosum');
                     return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
                 }
@@ -226,9 +267,13 @@ class Metode extends BaseController {
                     ]);
 
                     $price = count($data_price) == 1 ? $data_price[0]['price'] : $product[0]['price'];
+                    $reseller_price = count($data_price) == 1 ? $data_price[0]['reseller_price'] : $product[0]['reseller_price'];
+                    $vip_price = count($data_price) == 1 ? $data_price[0]['vip_price'] : $product[0]['vip_price'];
 
                     $method[] = array_merge($loop, [
                         'price' => $price,
+                        'reseller_price' => $reseller_price,
+                        'vip_price' => $vip_price,
                     ]);
                 }
 
@@ -238,11 +283,15 @@ class Metode extends BaseController {
                 ]);
 
                 $price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+                $reseller_price = count($find_price) == 1 ? $find_price[0]['reseller_price'] : $product[0]['reseller_price'];
+                $vip_price = count($find_price) == 1 ? $find_price[0]['vip_price'] : $product[0]['vip_price'];
 
                 $method = array_merge($method, [
                     [
                         'id' => 10001,
                         'price' => $price,
+                        'reseller_price' => $reseller_price,
+                        'vip_price' => $vip_price,
                         'image' => 'balance.png',
                     ]
                 ]);

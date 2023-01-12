@@ -19,13 +19,21 @@
 												<table class="table table-white">
 													<tr class="bg-primary text-white">
 														<th>Metode</th>
-														<th>Harga</th>
+														<th>Harga Member</th>
+														<th>Harga Reseller</th>
+														<th>Harga VIP</th>
 													</tr>
 													<?php foreach ($method as $loop): ?>
 													<tr>
 														<td><img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" alt="" width="100" class="rounded"></td>
 														<td>
 															<input type="number" class="form-control" autocomplete="off" value="<?= $loop['price']; ?>" name="price[<?= $loop['id']; ?>]">
+														</td>
+														<td>
+															<input type="number" class="form-control" autocomplete="off" value="<?= $loop['reseller_price']; ?>" name="reseller_price[<?= $loop['id']; ?>]">
+														</td>
+														<td>
+															<input type="number" class="form-control" autocomplete="off" value="<?= $loop['vip_price']; ?>" name="vip_price[<?= $loop['id']; ?>]">
 														</td>
 													</tr>
 													<?php endforeach ?>
