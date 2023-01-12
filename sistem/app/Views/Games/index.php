@@ -141,7 +141,7 @@
                                 <div class="section">
                                     <div class="card-body shadow">
                                         <div class="text-white text-center position-absolute num-page">4</div>
-                                        <h5 style="margin-left: 55px; margin-top: 10px;">Konfirmasi Pesanan</h5>
+                                        <h5 style="margin-left: 55px; margin-top: 10px;">Bukti Pembelian</h5>
                                         <div class="form-group pt-4">
 
                                             <input type="text" name="wa" placeholder="Masukan No. Whatsapp" class="form-control" value="" required>

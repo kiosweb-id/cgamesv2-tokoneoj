@@ -380,6 +380,7 @@ class Games extends BaseController {
                                                 'total_bayar' => $price * $quantity,
                                                 'method' => $method[0]['method'],
                                                 'nickname' => $data_post['username'],
+                                                'username' => $data_post['username'],
                                             ];
 
                                             $this->sendWa($data_post['wa'], $data_wa);
@@ -708,7 +709,7 @@ class Games extends BaseController {
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => array(
                 'target' => $target,
-                'message' => "Halo kak, \r\n\r\nBerikut adalah rincian pesanan Anda:\r\n\r\n- Produk : " . $data_wa['product'] . " \r\n- No.Invoice : " . $data_wa['order_id'] . " \r\n- Total Tagihan : " . $data_wa['total_bayar'] . " \r\n- Metode Pembayaran : " . $data_wa['method'] ."\r\n\r\n Cek pesanan anda di sini ". base_url() . "/payment"  ."\r\n\r\nTerima kasih.",
+                'message' => "Halo kak, \r\n\r\nBerikut adalah rincian pesanan Anda:\r\n\r\n- Produk : " . $data_wa['product'] . " \r\n- No.Invoice : " . $data_wa['order_id'] . " \r\n- Total Tagihan : " . $data_wa['total_bayar'] . " \r\n- Metode Pembayaran : " . $data_wa['method'] ."\r\n\r\nCek pesanan anda di sini ". base_url() . "/payment/" . $data_wa['order_id']  ."\r\n\r\nTerima kasih.",
                 'countryCode' => '62', //optional
             ),
             CURLOPT_HTTPHEADER => [
