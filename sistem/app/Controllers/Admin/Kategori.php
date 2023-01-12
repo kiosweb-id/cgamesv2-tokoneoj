@@ -19,6 +19,7 @@ class Kategori extends BaseController {
 
         if ($this->request->getPost('tombol')) {
             $data_post = [
+                'icdon' => $this->request->getPost('icon'),
                 'category' => addslashes(trim(htmlspecialchars($this->request->getPost('category')))),
                 'sort' => addslashes(trim(htmlspecialchars($this->request->getPost('sort')))),
             ];
@@ -61,6 +62,7 @@ class Kategori extends BaseController {
                 if ($this->request->getPost('sort')) {
                     if (is_numeric($this->request->getPost('sort'))) {
                         $this->M_Base->data_update('category', [
+                            'icon' => $this->request->getPost('icon'),
                             'sort' => $this->request->getPost('sort'),
                         ], $id);
                     } else {

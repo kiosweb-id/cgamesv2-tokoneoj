@@ -19,6 +19,12 @@
 											<div class="collapse" id="collapseExample">
 												<form action="" method="POST">
 													<div class="form-group row">
+														<label class="col-form-label text-dark col-md-4">Icon</label>
+														<div class="col-md-8">
+															<input type="text" class="form-control" autocomplete="off" name="icon">
+														</div>
+													</div>
+													<div class="form-group row">
 														<label class="col-form-label text-dark col-md-4">Kategori Baru</label>
 														<div class="col-md-8">
 															<input type="text" class="form-control" autocomplete="off" name="category">
@@ -43,6 +49,7 @@
 										<table class="table-white table table-striped">
 											<tr class="bg-primary text-white">
 												<th>No</th>
+												<th>Icon</th>
 												<th>Kategori</th>
 												<th>Urutan</th>
 												<th>Action</th>
@@ -50,6 +57,14 @@
 											<?php $no = 1; foreach ($kategori as $loop): ?>
 											<tr>
 												<td width="10"><?= $no++; ?></td>
+												<td>
+													<div class="input-group">
+														<div class="mr-2 pt-2">
+															<i class="<?= $loop['icon']; ?>"></i>
+														</div>
+														<input type="text" class="form-control" value="<?= $loop['icon']; ?>" style="width: 10px;" id="icon-<?= $loop['id']; ?>">
+													</div>
+												</td>
 												<td><?= $loop['category']; ?></td>
 												<td>
 													<div class="input-group">
@@ -74,12 +89,13 @@
 				<?php $this->section('js'); ?>
 				<script>
 					function save_sort(id) {
+						var icon = $("#icon-" + id).val();
 						var sort = $("#sort-" + id).val();
 
 						$.ajax({
 							url: '<?= base_url(); ?>/admin/kategori/edit/' + id,
 							type: 'POST',
-							data: 'sort=' + sort,
+							data: {icon : icon, sort : sort},
 							success: function(result) {
 								Swal.fire('Berhasil', 'Urutan kategori berhasil disimpan', 'success');
 							}
