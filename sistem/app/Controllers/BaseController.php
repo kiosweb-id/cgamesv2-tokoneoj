@@ -10,6 +10,9 @@ use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
 
 use App\Models\M_Base;
+use App\Models\LevelModel;
+use App\Models\LevelUpgradeModel;
+use App\Models\UserModel;
 
 /**
  * Class BaseController
@@ -52,6 +55,9 @@ abstract class BaseController extends Controller {
         $this->agent = $this->request->getUserAgent();
 
         $this->M_Base = new M_Base;
+        $this->MUser = new UserModel;
+        $this->MLevel = new LevelModel;
+        $this->MLevelUp = new LevelUpgradeModel;
 
         if (preg_match("/webzip|httrack|wget|FlickBot|downloader|production
         bot|superbot|PersonaPilot|NPBot|WebCopier|vayala|imagefetch|
