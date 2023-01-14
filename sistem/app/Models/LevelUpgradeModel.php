@@ -14,7 +14,7 @@ class LevelUpgradeModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['level_id','level_name','price','users_id','method_name','method_id','status','keterangan','date_created','date_updated'];
+    protected $allowedFields    = ['code', 'level_id','level_name','price','user_id','method_id', 'method_name','payment_code','status','keterangan','date_created','date_updated'];
 
     // Dates
     protected $useTimestamps = true;
