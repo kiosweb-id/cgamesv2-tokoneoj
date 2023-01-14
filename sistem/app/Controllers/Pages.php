@@ -77,6 +77,8 @@ class Pages extends BaseController {
                         if ($users[0]['status'] === 'On') {
                             if (password_verify($data_post['password'], $users[0]['password'])) {
 
+                                $this->session->set('level_id', $users[0]['level_id']);
+                                $this->session->set('user_id', $users[0]['id']);
                                 $this->session->set('username', $users[0]['username']);
 
                                 $this->session->setFlashdata('success', 'Login berhasil');
