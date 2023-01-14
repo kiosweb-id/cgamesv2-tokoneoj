@@ -90,50 +90,184 @@
                                     <div class="card-body shadow">
                                         <div class="text-white text-center position-absolute num-page">3</div>
                                         <h5 style="margin-left: 55px; margin-top: 10px;">Pilih Pembayaran</h5>
-                                        <div class="row pt-4 pr-2 mb-2">
 
-                                            <?php if ($pay_balance === 'Y'): ?>
-                                            <div class="col-sm-12 col-12">
-                                                <input class="radio-nominal p-2 border rounded mb-3 method-list" type="radio" name="method" value="balance" id="method-balance">
-                                                <label for="method-balance">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="ml-2 mr-2 pb-0">
-                                                                <img src="<?= base_url(); ?>/assets/images/method/balance.png" class="rounded img-fluid mb-1" style="height: 40px;">
-                                                                <p class="m-0" style="font-weight: normal;">Saldo Akun</p>
-                                                            </div>
+                                        <div id="main">
+                                            <div class="container">
+                                                <div class="accordion" id="faq">
+                                                    
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead1">
+                                                            <a href="#" class="btn btn-header-link pt-4" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                                                                Saldo
+                                                            </a>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <div class="ml-2 mt-2 text-right">
-                                                                <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-balance"></p>
+                                                        <div id="faq1" class="collapse show" aria-labelledby="faqhead1" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                <div class="row pt-4 pr-2 mb-2">
+
+                                                                    <?php if ($pay_balance === 'Y'): ?>
+                                                                    <div class="col-sm-12 col-12">
+                                                                        <input class="radio-nominal p-2 border rounded mb-3 method-list" type="radio" name="method" value="balance" id="method-balance">
+                                                                        <label for="method-balance">
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <div class="ml-2 mr-2 pb-0">
+                                                                                        <img src="<?= base_url(); ?>/assets/images/method/balance.png" class="rounded img-fluid mb-1" style="height: 40px;">
+                                                                                        <p class="m-0" style="font-weight: normal;">Saldo Akun</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <div class="ml-2 mt-2 text-right">
+                                                                                        <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-balance"></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <?php endif ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </label>
-                                            </div>
-                                            <?php endif ?>
 
-                                            <?php foreach ($method as $loop): ?>
-                                            <div class="col-sm-12 col-12">
-                                                <input class="radio-nominal" type="radio" name="method" value="<?= $loop['id']; ?>" id="method-<?= $loop['id']; ?>">
-                                                <label for="method-<?= $loop['id']; ?>">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="ml-2 mr-2 pb-0">
-                                                                <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" class="rounded img-fluid mb-1" style="height: 40px;">
-                                                                <p class="m-0" style="font-weight: normal;"><?= $loop['method']; ?></p>
-                                                            </div>
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead2">
+                                                            <a href="#" class="btn btn-header-link pt-4 collapsed" data-toggle="collapse" data-target="#faq2"
+                                                                aria-expanded="true" aria-controls="faq2">E-Wallet</a>
                                                         </div>
-                                                        <div class="col-6">
-                                                            <div class="ml-2 mt-2 text-right">
-                                                                <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-<?= $loop['id']; ?>"></p>
+                                                        <div id="faq2" class="collapse" aria-labelledby="faqhead2" data-parent="#faq">
+                                                            <div class="card-body">
+                                                                <div class="row pt-4 pr-2 mb-2">
+                                                                    <?php foreach ($method as $loop): ?>
+                                                                    <?php if($loop['category'] == 'E-Wallet') { ?>
+                                                                    <div class="col-sm-12 col-12">
+                                                                        <input class="radio-nominal" type="radio" name="method" value="<?= $loop['id']; ?>" id="method-<?= $loop['id']; ?>">
+                                                                        <label for="method-<?= $loop['id']; ?>">
+                                                                            <div class="row">
+                                                                                <div class="col-6">
+                                                                                    <div class="ml-2 mr-2 pb-0">
+                                                                                        <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" class="rounded img-fluid mb-1" style="height: 40px;">
+                                                                                        <p class="m-0" style="font-weight: normal;"><?= $loop['method']; ?></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-6">
+                                                                                    <div class="ml-2 mt-2 text-right">
+                                                                                        <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-<?= $loop['id']; ?>"></p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                    <?php } ?>
+                                                                    <?php endforeach ?>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </label>
+
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead3">
+                                                            <a href="#" class="btn btn-header-link pt-4 collapsed" data-toggle="collapse" data-target="#faq3"
+                                                                aria-expanded="true" aria-controls="faq3">Bank Transfer</a>
+                                                        </div>
+                                                        <div id="faq3" class="collapse" aria-labelledby="faqhead3" data-parent="#faq">
+                                                            <div class="card-body">
+                                                            <?php foreach ($method as $loop): ?>
+                                                                <?php if($loop['category'] == 'Bank Transfer') { ?>
+                                                                <div class="col-sm-12 col-12">
+                                                                    <input class="radio-nominal" type="radio" name="method" value="<?= $loop['id']; ?>" id="method-<?= $loop['id']; ?>">
+                                                                    <label for="method-<?= $loop['id']; ?>">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mr-2 pb-0">
+                                                                                    <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" class="rounded img-fluid mb-1" style="height: 40px;">
+                                                                                    <p class="m-0" style="font-weight: normal;"><?= $loop['method']; ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mt-2 text-right">
+                                                                                    <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-<?= $loop['id']; ?>"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <?php } ?>
+                                                                <?php endforeach ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead4">
+                                                            <a href="#" class="btn btn-header-link pt-4 collapsed" data-toggle="collapse" data-target="#faq4"
+                                                                aria-expanded="true" aria-controls="faq4">Virtual Account</a>
+                                                        </div>
+                                                        <div id="faq4" class="collapse" aria-labelledby="faqhead4" data-parent="#faq">
+                                                            <div class="card-body">
+                                                            <?php foreach ($method as $loop): ?>
+                                                                <?php if($loop['category'] == 'Virtual Account') { ?>
+                                                                <div class="col-sm-12 col-12">
+                                                                    <input class="radio-nominal" type="radio" name="method" value="<?= $loop['id']; ?>" id="method-<?= $loop['id']; ?>">
+                                                                    <label for="method-<?= $loop['id']; ?>">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mr-2 pb-0">
+                                                                                    <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" class="rounded img-fluid mb-1" style="height: 40px;">
+                                                                                    <p class="m-0" style="font-weight: normal;"><?= $loop['method']; ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mt-2 text-right">
+                                                                                    <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-<?= $loop['id']; ?>"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <?php } ?>
+                                                                <?php endforeach ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead5">
+                                                            <a href="#" class="btn btn-header-link pt-4 collapsed" data-toggle="collapse" data-target="#faq5"
+                                                                aria-expanded="true" aria-controls="faq5">Convenience Store</a>
+                                                        </div>
+                                                        <div id="faq5" class="collapse" aria-labelledby="faqhead5" data-parent="#faq">
+                                                            <div class="card-body">
+                                                            <?php foreach ($method as $loop): ?>
+                                                                <?php if($loop['category'] == 'Convenience Store') { ?>
+                                                                <div class="col-sm-12 col-12">
+                                                                    <input class="radio-nominal" type="radio" name="method" value="<?= $loop['id']; ?>" id="method-<?= $loop['id']; ?>">
+                                                                    <label for="method-<?= $loop['id']; ?>">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mr-2 pb-0">
+                                                                                    <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" class="rounded img-fluid mb-1" style="height: 40px;">
+                                                                                    <p class="m-0" style="font-weight: normal;"><?= $loop['method']; ?></p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <div class="ml-2 mt-2 text-right">
+                                                                                    <p class="mb-0" style="font-weight: bold; font-size: 13px;" id="price-method-<?= $loop['id']; ?>"></p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                                <?php } ?>
+                                                                <?php endforeach ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                            <?php endforeach ?>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

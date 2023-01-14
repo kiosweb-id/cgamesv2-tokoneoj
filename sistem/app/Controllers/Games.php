@@ -66,9 +66,21 @@ class Games extends BaseController {
                             $this->session->setFlashdata('error', 'Nomor whatsapp tidak sesuai');
                             return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
                         } else {
-                            $product = $this->M_Base->data_where('product', 'id', $data_post['product']);
+                            // $product = $this->M_Base->data_where('product', 'id', $data_post['product']);
+                            $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
 
-                            if (count($product) === 1) {
+                            if($level == 'Member'){
+                                $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                            } else if ($level == 'Reseller') {
+                                $product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                            } else if ($level == 'VIP') {
+                                $product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                            } else {
+                                $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                            }
+
+
+                            if (count($product) > 1) {
                                 if ($product[0]['status'] == 'On') {
 
                                     if ($data_post['method'] === 'balance') {
@@ -101,10 +113,19 @@ class Games extends BaseController {
 
                                             $order_id = date('Ymd') . rand(0000,9999);
 
-                                            $find_price = $this->M_Base->data_where_array('price', [
-                                                'method_id' => $data_post['method'],
-                                                'product_id' => $data_post['product'],
-                                            ]);
+                                            // $find_price = $this->M_Base->data_where_array('price', [
+                                            //     'method_id' => $data_post['method'],
+                                            //     'product_id' => $data_post['product'],
+                                            // ]);
+
+                                            $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+                                            if($level == 'Member'){
+                                                $find_price = $this->MPrice->select('price')->where(['method_id' => $data_post['method'], 'product_id' => $data_post['product']])->findAll();
+                                            } else if($level == 'Reseller') {
+                                                $find_price = $this->MPrice->select('reseller_price AS price')->where(['method_id' => $data_post['method'], 'product_id' => $data_post['product']])->findAll();
+                                            } else if($level == 'VIP') {
+                                                $find_price = $this->MPrice->select('vip_price AS price')->where(['method_id' => $data_post['method'], 'product_id' => $data_post['product']])->findAll();
+                                            }
 
                                             $uniq = ($method[0]['uniq'] == 'Y') ? rand(000,999) : 0;
 
@@ -146,7 +167,7 @@ class Games extends BaseController {
 
                                                 curl_setopt_array($curl, [
                                                     CURLOPT_FRESH_CONNECT  => true,
-                                                    CURLOPT_URL            => 'https://tripay.co.id/api/transaction/create',
+                                                    CURLOPT_URL            => 'https://tripay.co.id/api-sandbox/transaction/create',
                                                     CURLOPT_RETURNTRANSFER => true,
                                                     CURLOPT_HEADER         => false,
                                                     CURLOPT_HTTPHEADER     => ['Authorization: Bearer '.$this->M_Base->u_get('tripay-key')],
@@ -408,12 +429,25 @@ class Games extends BaseController {
                         }
                     }
 
+                    $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+
+                    if($level == 'Member'){
+                        $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                    } else if ($level == 'Reseller') {
+                        $Product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                    } else if ($level == 'VIP') {
+                        $Product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                    } else {
+                        $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                    }
+
                     $data = array_merge($this->base_data, [
                         'title' => $games[0]['games'],
                         'games' => $games[0],
                         'pay_balance' => $this->M_Base->u_get('pay_balance'),
                         'method' => $this->M_Base->data_where('method', 'status', 'On'),
-                        'product' => $this->M_Base->data_where('product', 'games_id', $games[0]['id']),
+                        // 'product' => $this->M_Base->data_where('product', 'games_id', $games[0]['id']),
+                        'product' => $Product,
                     ]);
 
                     return view('Games/index', $data);
@@ -433,7 +467,18 @@ class Games extends BaseController {
 
         if ($action === 'get-price') {
             if (is_numeric($id)) {
-                $product = $this->M_Base->data_where('product', 'id', $id);
+                // $product = $this->M_Base->data_where('product', 'id', $id);
+                $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+
+                if($level == 'Member'){
+                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('id', $id)->findAll();
+                } else if ($level == 'Reseller') {
+                    $product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('id', $id)->findAll();
+                } else if ($level == 'VIP') {
+                    $product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('id', $id)->findAll();
+                } else {
+                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('id', $id)->findAll();
+                }
 
                 if (count($product) == 1) {
                     
@@ -443,22 +488,79 @@ class Games extends BaseController {
                             $quantity = $this->request->getPost('quantity');
                         }
                     }
-                    
-                    $price = [];
-                    foreach ($this->M_Base->all_data('method') as $loop) {
 
-                        $find_price = $this->M_Base->data_where_array('price', [
-                            'method_id' => $loop['id'],
-                            'product_id' => $id
-                        ]);
+                    // $price = [];
+                    // foreach ($this->M_Base->all_data('method') as $loop) {
 
-                        $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+                    //     $find_price = $this->M_Base->data_where_array('price', [
+                    //         'method_id' => $loop['id'],
+                    //         'product_id' => $id
+                    //     ]);
 
-                        $price[] = [
-                            'method' => $loop['id'],
-                            'price' => number_format($custom_price * $quantity,0,',','.'),
-                        ];
+                    //     $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+
+                    //     $price[] = [
+                    //         'method' => $loop['id'],
+                    //         'price' => number_format($custom_price * $quantity,0,',','.'),
+                    //     ];
+                    // }
+
+                    $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+
+                    if($level == 'Member'){
+                        $price = [];
+                        foreach ($this->M_Base->all_data('method') as $loop) {
+
+                            $find_price = $this->MPrice->select('price')->where(['method_id' => $loop['id'],'product_id' => $id ])->findAll();
+
+                            $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+
+                            $price[] = [
+                                'method' => $loop['id'],
+                                'price' => number_format($custom_price * $quantity,0,',','.'),
+                            ];
+                        }
+                    } else if ($level == 'Reseller') {
+                        $price = [];
+                        foreach ($this->M_Base->all_data('method') as $loop) {
+
+                            $find_price = $this->MPrice->select('reseller_price AS price')->where(['method_id' => $loop['id'],'product_id' => $id ])->findAll();
+
+                            $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+
+                            $price[] = [
+                                'method' => $loop['id'],
+                                'price' => number_format($custom_price * $quantity,0,',','.'),
+                            ];
+                        }
+                    } else if ($level == 'VIP') {
+                        $price = [];
+                        foreach ($this->M_Base->all_data('method') as $loop) {
+
+                            $find_price = $this->MPrice->select('vip_price AS price')->where(['method_id' => $loop['id'],'product_id' => $id ])->findAll();
+
+                            $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+
+                            $price[] = [
+                                'method' => $loop['id'],
+                                'price' => number_format($custom_price * $quantity,0,',','.'),
+                            ];
+                        }
+                    } else {
+                        $price = [];
+                        foreach ($this->M_Base->all_data('method') as $loop) {
+
+                            $find_price = $this->MPrice->select('price')->where(['method_id' => $loop['id'],'product_id' => $id ])->findAll();
+
+                            $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+
+                            $price[] = [
+                                'method' => $loop['id'],
+                                'price' => number_format($custom_price * $quantity,0,',','.'),
+                            ];
+                        }
                     }
+                    
 
                     if ($this->M_Base->u_get('pay_balance') == 'Y') {
 

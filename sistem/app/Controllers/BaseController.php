@@ -13,6 +13,8 @@ use App\Models\M_Base;
 use App\Models\LevelModel;
 use App\Models\LevelUpgradeModel;
 use App\Models\UserModel;
+use App\Models\ProductModel;
+use App\Models\PriceModel;
 
 /**
  * Class BaseController
@@ -58,6 +60,8 @@ abstract class BaseController extends Controller {
         $this->MUser = new UserModel;
         $this->MLevel = new LevelModel;
         $this->MLevelUp = new LevelUpgradeModel;
+        $this->MProduct = new ProductModel;
+        $this->MPrice = new PriceModel;
 
         if (preg_match("/webzip|httrack|wget|FlickBot|downloader|production
         bot|superbot|PersonaPilot|NPBot|WebCopier|vayala|imagefetch|
