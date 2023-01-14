@@ -429,14 +429,18 @@ class Games extends BaseController {
                         }
                     }
 
-                    $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+                    if(session('user_id') !== null){
+                        $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
 
-                    if($level == 'Member'){
-                        $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
-                    } else if ($level == 'Reseller') {
-                        $Product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
-                    } else if ($level == 'VIP') {
-                        $Product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                        if($level == 'Member'){
+                            $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                        } else if ($level == 'Reseller') {
+                            $Product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                        } else if ($level == 'VIP') {
+                            $Product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                        } else {
+                            $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                        }
                     } else {
                         $Product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
                     }
