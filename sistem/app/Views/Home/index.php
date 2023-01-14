@@ -43,7 +43,8 @@
                 <div class="row">
                     <div class="col-12 col-md-3 category">
                         <a id="<?= url_title($game['category'], '-', true); ?>" class="cursor-pointer active" onclick="select_tipe('mobile-legends');">
-                            <img src="https://javagamestore.com/assets/tipe/1671701360_204521123dc06d4c9df8.png" alt="">
+                            <!-- <img src="https://javagamestore.com/assets/tipe/1671701360_204521123dc06d4c9df8.png" alt=""> -->
+                            <i class="<?= $game['icon'] ?> mr-2"></i>
                             <?= $game['category']; ?> 
                         </a>
                     </div>
@@ -75,10 +76,10 @@
             <div class="modal fade" id="modal-popup" tabindex="-1" aria-labelledby="modal-popupLabel" aria-modal="true" role="dialog" style="display: block;">
                 <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
                     <div class="modal-content" style="background: var(--warna_5);">
-                    <div class="modal-body">
-                        <p><img width="100%" alt="" src="https://i.postimg.cc/t43W42yt/cgames.png" style="height:100%; width:100%"></p>
-                        <a id="promoClose" value="Close" href="#">×</a>
-                    </div>
+                        <div class="modal-body">
+                            <p><img width="100%" alt="" src="https://i.postimg.cc/t43W42yt/cgames.png" style="height:100%; width:100%"></p>
+                            <a id="promoClose" data-dismiss="modal" value="Close" href="#">×</a>
+                        </div>
                     </div>
                 </div>
             </div>

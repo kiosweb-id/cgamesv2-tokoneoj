@@ -29,6 +29,7 @@ class Home extends BaseController {
                     }
                     
                     $games[] = [
+                        'icon' => $category['icon'],
                         'category' => $category['category'],
                         'games' => $games_x,
                     ];
