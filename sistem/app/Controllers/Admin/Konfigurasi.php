@@ -32,6 +32,19 @@ class Konfigurasi extends BaseController {
 
                 $this->session->setFlashdata('success', 'Data konfiguasi berhasil disimpan');
                 return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+            } else if ($this->request->getPost('tombol') == 'modal') {
+
+                $image = $this->M_Base->upload_file($this->request->getFiles()['modal_image'], 'assets/images/modal/');
+
+                if ($image) {
+                    $this->M_Base->u_update('modal-img', $image);
+
+                    $this->session->setFlashdata('success', 'Gambar modal berhasil diubah');
+                    return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                } else {
+                    $this->session->setFlashdata('error', 'Gambar modal tidak sesuai');
+                    return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                }
             } else if ($this->request->getPost('tombol') == 'banner') {
 
                 $image = $this->M_Base->upload_file($this->request->getFiles()['image'], 'assets/images/banner/');

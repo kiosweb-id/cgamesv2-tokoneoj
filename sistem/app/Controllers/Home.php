@@ -44,6 +44,7 @@ class Home extends BaseController {
     		'games' => $games,
             'banner' => $this->M_Base->all_data('banner', 3),
             'search' => $search,
+            'modal_img' => $this->M_Base->u_get('modal-img'),
     	]);
 
         return view('Home/index', $data);

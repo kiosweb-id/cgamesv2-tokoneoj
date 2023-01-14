@@ -77,7 +77,7 @@
                 <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
                     <div class="modal-content" style="background: var(--warna_5);">
                         <div class="modal-body">
-                            <p><img width="100%" alt="" src="https://i.postimg.cc/t43W42yt/cgames.png" style="height:100%; width:100%"></p>
+                            <p><img width="100%" alt="" src="<?= base_url('/assets/images/modal/' . $modal_img) ?>" style="height:100%; width:100%"></p>
                             <a id="promoClose" data-dismiss="modal" value="Close" href="#">×</a>
                         </div>
                     </div>
