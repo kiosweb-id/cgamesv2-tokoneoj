@@ -10,6 +10,9 @@
         <meta name="description" content="<?= strip_tags($web['description']); ?>">
         <meta name="keywords" content="<?= strip_tags($web['keywords']); ?>">
 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/solid.css" integrity="sha384-Tv5i09RULyHKMwX0E8wJUqSOaXlyu3SQxORObAI08iUwIalMmN5L6AvlPX2LMoSE" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous"/>
+
         <link rel="shortcut icon" href="<?= base_url(); ?>/assets/images/<?= $web['logo']; ?>">
         <link rel="stylesheet" href="<?= base_url(); ?>/assets/plugins/simplebar/css/simplebar.css">
         <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/bootstrap.min.css">
@@ -101,7 +104,10 @@
             .circle-primary {
                 background: var(--warna_3);
             }
-            .num-page {
+            .bg-circle-primary {
+                background: var(--warna_3);
+            }
+           .num-page {
                 width: 40px;
                 height: 40px;
                 border-radius: 12px 4px;
@@ -239,6 +245,68 @@
                 font-size: 17px;
                 opacity: 0.6;
                 text-decoration: none;
+            }
+
+
+            /* accordion */
+            #main {
+                margin: 50px 0;
+            }
+
+            #main #faq .card {
+                margin-bottom: 30px;
+                border: 0;
+            }
+
+            #main #faq .card .card-header {
+                border: 0;
+                -webkit-box-shadow: 0 0 20px 0 rgba(213, 213, 213, 0.5);
+                        box-shadow: 0 0 20px 0 rgba(213, 213, 213, 0.5);
+                border-radius: 2px;
+                padding: 0;
+            }
+
+            #main #faq .card .card-header .btn-header-link {
+                color: #fff;
+                display: block;
+                text-align: left;
+                background: var(--warna_3);
+                padding: 20px;
+                font-weight : bold;
+                font-size : 12px;
+            }
+
+            #main #faq .card .card-header .btn-header-link:after {
+                content: "\f107";
+                color: #fff;
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 1000;
+                float: right;
+            }
+
+            #main #faq .card .card-header .btn-header-link.collapsed {
+                background: #A541BB;
+            }
+
+            #main #faq .card .card-header .btn-header-link.collapsed:after {
+                content: "\f106";
+                color: #fff;
+                font-family: 'Font Awesome 5 Free';;
+            }
+
+            #main #faq .card .collapsing {
+                background: #A541BB;
+                line-height: 30px;
+            }
+
+            #main #faq .card .collapse {
+                border: 0;
+            }
+
+            #main #faq .card .collapse.show {
+                background: #A541BB;
+                line-height: 30px;
+                color: #222;
             }
         </style>
 

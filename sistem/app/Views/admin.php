@@ -73,6 +73,13 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Kelola Admin</span></a>
             </li>
+
+            <!-- Nav Item - Member -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url(); ?>/admin/level">
+                    <i class="fas fa-duotone fa-layer-group"></i>
+                    <span>Kelola Level Member</span></a>
+            </li>
             
             <!-- Nav Item - Member -->
             <li class="nav-item">
@@ -100,6 +107,13 @@
                 <a class="nav-link" href="<?= base_url(); ?>/admin/produk">
                     <i class="fas fa-fw fa-cart-plus"></i>
                     <span>Kelola Produk</span></a>
+            </li>
+
+            <!-- Nav Item -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url(); ?>/admin/level-upgrade">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Kelola Upgrade Level</span></a>
             </li>
             
             <!-- Nav Item - Pesanan -->

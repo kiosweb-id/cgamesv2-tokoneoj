@@ -15,14 +15,13 @@ class LevelUpgrade extends BaseController {
 
         $data = array_merge($this->base_data, [
             'title' => 'Data Upgrade Level',
-            'level_upgrade' => $this->MLevelUp->findAll(),
+            'level_upgrade' => $this->MLevelUp->select('level_upgrade.*, users.username')->join('users', 'users.id = level_upgrade.user_id')->findAll(),
         ]);
 
         return view('Admin/Level-Upgrade/index', $data);
     }
 
     public function edit($id = null) {
-
         if ($this->admin == false) {
             $this->session->setFlashdata('error', 'Silahkan login dahulu');
             return redirect()->to(base_url() . '/admin/login');
@@ -30,32 +29,53 @@ class LevelUpgrade extends BaseController {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
             
-            $level = $this->M_Base->data_where('level', 'id', $id);
+            $levelUp = $this->MLevelUp->select('level_upgrade.*, users.username')->join('users', 'users.id = level_upgrade.user_id')->where('level_upgrade.id', $id)->first();
 
-            if (count($level) === 1) {
-
+            if (count($levelUp) > 1) {
                 if ($this->request->getPost('tombol')) {
                     $data_post = [
-                        'level_name' => addslashes(trim(htmlentities($this->request->getPost('level_name')))),
-                        'price' => addslashes(trim(htmlentities($this->request->getPost('price')))),
+                        'id' => $id,
+                        'status' => addslashes(trim(htmlentities($this->request->getPost('status')))),
                     ];
 
-                    if (empty($data_post['level_name'])) {
-                        $this->session->setFlashdata('error', 'Nama level tidak boleh kosong');
-                        return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
-                    } else if (empty($data_post['price'])) {
-                        $this->session->setFlashdata('error', 'Harga tidak boleh kosong');
-                        return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                    if (empty($data_post['status'])) {
+                        $this->session->setFlashdata('error', 'Status tidak boleh kosong');
+                        return redirect()->to(base_url() . '/admin/level-upgrade/edit/' . $id);
                     } else {
-                        $this->M_Base->data_update('level', $data_post, $id);
+                        $level_id = $this->request->getPost('level_id');
+                        $user_id = $this->request->getPost('user_id');
+                        $status = $this->request->getPost('status');
+                        if($status == 'Success'){
+                            if($this->MUser->save([
+                                'id' => $user_id,
+                                'level_id' => $level_id,
+                            ])){
+                                if($this->MLevelUp->save($data_post)){
+                                    $this->session->setFlashdata('success', 'Data berhasil diperbarui');
+                                    return redirect()->to(base_url() . '/admin/level-upgrade');
+                                }else {
+                                    $this->session->setFlashdata('success', 'Data gagal diperbarui');
+                                    return redirect()->to(base_url() . '/admin/level-upgrade');
+                                }
+                            } else {
+                                $this->session->setFlashdata('success', 'Data gagal diperbarui');
+                                return redirect()->to(base_url() . '/admin/level-upgrade');
+                            }
+                        } else {
+                            if($this->MLevelUp->save($data_post)){
+                                $this->session->setFlashdata('success', 'Data berhasil diperbarui');
+                                return redirect()->to(base_url() . '/admin/level-upgrade');
+                            }else {
+                                $this->session->setFlashdata('success', 'Data gagal diperbarui');
+                                return redirect()->to(base_url() . '/admin/level-upgrade');
+                            }
+                        }
 
-                        $this->session->setFlashdata('success', 'Data level berhasil diedit');
-                        return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
                     }
                 }
 
                 $data = array_merge($this->base_data, [
-                    'level' => $level,
+                    'level_up' => $levelUp,
                     'title' => 'Edit Data Upgrade Level',
                 ]);
 
@@ -63,6 +83,17 @@ class LevelUpgrade extends BaseController {
             } else {
                 throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
             }
+        }
+    }
+
+
+    public function delete($id = null){
+        if($this->MLevelUp->delete($id)){
+            $this->session->setFlashdata('success', 'Data upgrade level berhasil dihapus');
+            return redirect()->to(base_url() . '/admin/level-upgrade');
+        } else {
+            $this->session->setFlashdata('error', 'Data upgrade level gagal dihapus');
+            return redirect()->to(base_url() . '/admin/level-upgrade');
         }
     }
 }

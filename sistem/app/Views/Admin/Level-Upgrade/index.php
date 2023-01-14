@@ -18,6 +18,7 @@
 									<table class="table-white table table-striped">
 										<tr class="bg-primary text-white">
 											<th width="10">No</th>
+											<th>Nama User</th>
 											<th>Nama Level</th>
 											<th>Harga</th>
 											<th>Status</th>
@@ -26,14 +27,15 @@
 										<?php $no = 1; foreach ($level_upgrade as $key => $value): ?>
 										<tr>
 											<td><?= $no++; ?></td>
-											<td><?= $loop['level_name']; ?></td>
-											<td><?= $loop['price']; ?></td>
-											<td><?= $loop['status']; ?></td>
+											<td><?= $value['username']; ?></td>
+											<td><?= $value['level_name']; ?></td>
+											<td>Rp. <?= number_format($value['price'], 0,'.',',') ; ?></td>
+											<td><?= $value['status']; ?></td>
 											<td>
 												<a href="<?= base_url(); ?>/admin/level-upgrade/edit/<?= $value['id']; ?>" class="btn btn-primary btn-sm">
 													<i class="fas fa-fw fa-edit"></i>
 												</a>
-												<a href="<?= base_url(); ?>/admin/level-upgrade/hapus/<?= $value['id']; ?>" class="btn btn-primary btn-sm">
+												<a href="<?= base_url(); ?>/admin/level-upgrade/delete/<?= $value['id']; ?>" class="btn btn-primary btn-sm">
 													Hapus
 												</a>
 											</td>

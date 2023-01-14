@@ -19,7 +19,7 @@ class Level extends BaseController {
 
         $data = array_merge($this->base_data, [
             'title' => 'Level',
-            'account' => $this->M_Base->all_data('level'),
+            'account' => $this->MLevel->findAll(),
         ]);
 
         return view('Admin/Level/index', $data);
