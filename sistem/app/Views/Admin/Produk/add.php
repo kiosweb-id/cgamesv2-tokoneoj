@@ -41,7 +41,7 @@
 														</div>
 													</div>
 													<div class="form-group row">
-														<label class="col-form-label col-md-4 text-dark">Harga Reller</label>
+														<label class="col-form-label col-md-4 text-dark">Harga Reseller</label>
 														<div class="col-md-8">
 															<input type="number" class="form-control" autocomplete="off" name="reseller_price">
 														</div>

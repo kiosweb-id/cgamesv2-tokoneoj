@@ -278,7 +278,7 @@
                                         <h5 style="margin-left: 55px; margin-top: 10px;">Bukti Pembelian</h5>
                                         <div class="form-group pt-4">
 
-                                            <input type="text" name="wa" placeholder="Masukan No. Whatsapp" class="form-control" value="" required>
+                                            <input type="number" name="wa" placeholder="Masukan No. Whatsapp" class="form-control" value="" required>
 
                                             <small class="mt-2 d-block mb-3">
                                                 Dengan membeli otomatis saya menyutujui <a href="<?= base_url(); ?>/syarat-ketentuan/" target="_blank" class="text-warning">Ketentuan Layanan</a>.
