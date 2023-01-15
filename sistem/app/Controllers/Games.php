@@ -217,8 +217,9 @@ class Games extends BaseController {
                                                     
                                                     $curl = curl_init();
                                                     
-                                                    $body['name']       = $username_tripay;
+                                                    $body['name']       = $username_ipaymu;
                                                     $body['phone']      = $data_post['wa'];
+                                                    $body['email']      = 'email@domain.com';
                                                     $body['amount']     = $price;
                                                     $body['referenceId']= rand(0000000,999999);
                                                     $body['product']    = array($product[0]['product']);

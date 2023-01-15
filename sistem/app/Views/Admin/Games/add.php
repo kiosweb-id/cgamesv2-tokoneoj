@@ -64,6 +64,7 @@
 																<option value="ml">Mobile Legends</option>
 																<option value="gi">Genshin Impact</option>
 																<option value="joki">Joki - Mobile Legends</option>
+																<option value="pulsa">Pulsa / E Wallet</option>
 															</select>
 														</div>
 													</div>
