@@ -85,7 +85,7 @@
 																<div class="card-body">
 																	<div class="row pt-4 pr-2 mb-2">
 
-																		<?php// if ($pay_balance === 'Y'): ?>
+																		<?php // if ($pay_balance === 'Y'): ?>
 																		<div class="col-sm-12 col-12">
 																			<input class="radio-nominal p-2 border rounded mb-3 method-list" type="radio" name="method" value="balance" id="method-balance">
 																			<label for="method-balance">
@@ -104,7 +104,7 @@
 																				</div>
 																			</label>
 																		</div>
-																		<?php// endif ?>
+																		<?php // endif ?>
 																	</div>
 																</div>
 															</div>
