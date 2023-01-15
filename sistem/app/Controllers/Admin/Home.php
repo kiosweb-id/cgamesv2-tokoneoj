@@ -37,8 +37,33 @@ class Home extends BaseController {
             $total_orders += $loop['price'];
         }
 
+        $TopUpData = $this->MTopUp->select('DISTINCT(username)')
+                                ->select('SUM(amount) AS amount')
+                                ->groupBy('username')
+                                ->orderBy('amount ASC')
+                                ->findAll();
+
+        // dd($TopUpData);
+        $rows = [];
+        foreach ($TopUpData as $key => $value) {
+            $TopUp = $this->MTopUp->select('username, method, amount, date_create')
+                                ->where('username', $value['username'])
+                                ->first();
+
+            $row['username']  = $TopUp['username'];
+            $row['method']    = $TopUp['method'];
+            $row['amount']    = $TopUp['amount'];
+            $row['date_create'] = $TopUp['date_create'];
+
+            $rows[] = $row;
+        }
+
     	$data = array_merge($this->base_data, [
     		'title' => 'Administrator',
+    		'total_trx_pending' => (int) count( $this->MOrder->where('status', 'Pending')->findAll()),
+    		'total_trx_proses'  => (int) count( $this->MOrder->where('status', 'Processing')->findAll()),
+    		'total_trx_batal'   => (int) count( $this->MOrder->where('status', 'Canceled')->findAll()),
+    		'topup_terbanyak'   => $rows,
             'total' => [
                 'admin' => $this->M_Base->data_count('admin'),
                 'games' => $this->M_Base->data_count('games'),
