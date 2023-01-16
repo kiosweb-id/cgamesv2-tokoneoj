@@ -19,7 +19,6 @@
 														<label class="col-form-label col-md-4 text-dark">Nama Level</label>
 														<div class="col-md-8">
 															<input type="text" name="level_name" class="form-control" autocomplete="off" value="<?= $level[0]['level_name']; ?>">
-															<small>Username tidak dapat diganti</small>
 														</div>
 													</div>
 													<div class="form-group row" id="tipe-manual">

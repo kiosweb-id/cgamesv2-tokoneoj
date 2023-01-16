@@ -112,14 +112,14 @@
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url(); ?>/admin/level-upgrade">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-upload"></i>
                     <span>Kelola Upgrade Level</span></a>
             </li>
             
             <!-- Nav Item - Pesanan -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= base_url(); ?>/admin/pesanan">
-                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <i class="fas fa-fw fa-download"></i>
                     <span>Kelola Pesanan</span></a>
             </li>
             

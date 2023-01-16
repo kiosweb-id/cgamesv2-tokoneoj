@@ -1,4 +1,4 @@
-				<?php $this->extend('template'); ?>
+				<?php $this->extend('admin'); ?>
 				
 				<?php $this->section('css'); ?>
 				<?php $this->endSection(); ?>

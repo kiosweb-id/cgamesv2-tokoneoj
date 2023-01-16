@@ -6,7 +6,7 @@
 				<?php $this->section('content'); ?>
 			
 						<div class="row">
-							<div class="col-lg-10 mx-auto">
+							<div class="col-lg-12 mx-auto">
 							    <?= alert(); ?>
 								<div class="card shadow mb-4">
 								    <div class="card-header py-3">
@@ -34,11 +34,11 @@
 												<td><?= $loop['method']; ?></td>
 												<td>Rp <?= number_format($loop['amount'],0,',','.'); ?></td>
 												<td><?= $loop['status']; ?></td>
-												<td width="10">
-													<a href="<?= base_url(); ?>/admin/topup/edit/<?= $loop['id']; ?>" class="btn btn-primary btn-sm">
+												<td class="d-flex" width="10">
+													<a href="<?= base_url(); ?>/admin/topup/edit/<?= $loop['id']; ?>" class="btn btn-primary btn-sm mr-2">
 													    <i class="fas fa-fw fa-edit"></i>
 													</a>
-													<button type="button" onclick="hapus('<?= base_url(); ?>/admin/topup/delete/<?= $loop['id']; ?>');" class="btn btn-danger btn-sm">
+													<button type="button" onclick="hapus('<?= base_url(); ?>/admin/topup/delete/<?= $loop['id']; ?>');" class="btn btn-danger btn-sm ms-2">
 													    <i class="fas fa-fw fa-trash"></i>
 													</button>
 												</td>

@@ -5,7 +5,7 @@
 				
 				<?php $this->section('content'); ?>
 						<div class="row">
-							<div class="col-lg-10 mx-auto">
+							<div class="col-lg-12 mx-auto">
 
 								<div class="card shadow mb-4">
 								    <div class="card-header py-3">
@@ -25,7 +25,7 @@
     												<th>Games</th>
     												<th>Produk</th>
     												<th>Harga Member</th>
-    												<th>Harga Reller</th>
+    												<th>Harga Reseller</th>
     												<th>Harga VIP</th>
     												<th>Status</th>
     												<th>Action</th>
@@ -37,7 +37,7 @@
     												<th>Games</th>
     												<th>Produk</th>
     												<th>Harga Member</th>
-    												<th>Harga Reller</th>
+    												<th>Harga Reseller</th>
     												<th>Harga VIP</th>
     												<th>Status</th>
     												<th>Action</th>

@@ -285,7 +285,7 @@
             }
 
             #main #faq .card .card-header .btn-header-link.collapsed {
-                background: #A541BB;
+                background: var(--warna_3);
             }
 
             #main #faq .card .card-header .btn-header-link.collapsed:after {
@@ -295,7 +295,7 @@
             }
 
             #main #faq .card .collapsing {
-                background: #A541BB;
+                background: var(--warna);
                 line-height: 30px;
             }
 
@@ -304,7 +304,7 @@
             }
 
             #main #faq .card .collapse.show {
-                background: #A541BB;
+                background: var(--warna);
                 line-height: 30px;
                 color: #222;
             }
@@ -536,7 +536,7 @@
         
         <div class="fab-container">
             <div class="fab fab-icon-holder" style="background-color:#FFF; padding:5px">
-                <img src="<?= base_url(); ?>/assets/images/callcenter.png" class="img-fluid" alt="" style="margin-top: -15px;">
+                <img src="<?= base_url(); ?>/assets/images/callcenter.png" class="img-fluid" alt="" style=";">
             </div>
             <ul class="fab-options">
                 
