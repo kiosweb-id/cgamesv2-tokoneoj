@@ -14,13 +14,13 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>/assets/images/<?= $web['logo']; ?>">
 
     <!-- Custom fonts for this template-->
-    <link href="<?= base_url(); ?>/sistem/public/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?= base_url(); ?>/public/template/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="<?= base_url(); ?>/sistem/public/template/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/public/template/css/sb-admin-2.min.css" rel="stylesheet">
     
     <?php $this->renderSection('css'); ?>
 
@@ -200,7 +200,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><b>Hallo, </b>Admin</span>
                                 <img class="img-profile rounded-circle"
-                                    src="/sistem/public/template/img/undraw_profile.svg">
+                                    src="/public/template/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -276,14 +276,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url(); ?>/sistem/public/template/vendor/jquery/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>/sistem/public/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url(); ?>/public/template/vendor/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>/public/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?= base_url(); ?>/sistem/public/template/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?= base_url(); ?>/public/template/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?= base_url(); ?>/sistem/public/template/js/sb-admin-2.min.js"></script>
+    <script src="<?= base_url(); ?>/public/template/js/sb-admin-2.min.js"></script>
     
     <!-- Custom scripts -->
         <!--<script src="<?= base_url(); ?>/assets/js/app-script.js"></script>-->
