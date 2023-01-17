@@ -69,6 +69,7 @@ class User extends BaseController {
 
         	$data = array_merge($this->base_data, [
         		'title' => 'Beranda',
+                'menu_active' => 'User',
                 'orders' => $this->M_Base->data_count('orders', ['username' => $this->users['username']]),
         	]);
 
@@ -83,6 +84,7 @@ class User extends BaseController {
         } else {
 
             $data = array_merge($this->base_data, [
+                'menu_active' => 'User',
                 'title' => 'Riwayat',
                 'riwayat' => $this->M_Base->data_where('orders', 'username', $this->users['username']),
             ]);
@@ -215,6 +217,7 @@ class User extends BaseController {
                 }
 
                 $data = array_merge($this->base_data, [
+                    'menu_active' => 'User',
                     'title' => 'Top Up',
                     'method' => $this->M_Base->all_data('method'),
                 ]);

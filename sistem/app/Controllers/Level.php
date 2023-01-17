@@ -26,6 +26,7 @@ class Level extends BaseController {
                 'level_list' => $this->MLevel->whereNotIn('id', $id_rules)->findAll(),
                 'histori_list' => $this->MLevelUp->findAll(),
                 'method' => $this->M_Base->all_data('method'),
+                'menu_active' => 'User',
             ]);
 
             return view('Level/index', $data);
