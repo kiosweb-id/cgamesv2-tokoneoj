@@ -417,7 +417,7 @@
 												<label class="col-md-4 col-form-label text-dark">Token</label>
 												<div class="col-md-8">
 													<input type="text" class="form-control" value="<?= $fonnte_token; ?>" name="fonnte_token" autocomplete="off">
-													<small>Kunjungi <a href="https://alfathan.my.id">website ini</a> untuk mendapatkan token</small>
+													<small>Kunjungi <a href="http://fonnte.com/">website ini</a> untuk mendapatkan token</small>
 												</div>
 											</div>
 											<div class="text-right">

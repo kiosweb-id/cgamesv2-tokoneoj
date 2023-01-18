@@ -33,29 +33,29 @@ class Level extends BaseController {
         }
     }
 
-    public function upgrade($levelUpId = null) {
-
+    public function upgrade() {
         if ($this->users === false) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
-            $data_post = [
-                'level_id' => addslashes(trim(htmlspecialchars($this->request->getPost('level_id')))),
-                'method' => addslashes(trim(htmlspecialchars($this->request->getPost('method')))),
-            ];
-
-            if (empty($data_post['level_id'])) {
+            
+            if (empty($this->request->getPost('level_id'))) {
                 $this->session->setFlashdata('error', 'Pilihan level tidak boleh kosong');
-                return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
-            } else if (empty($data_post['method'])) {
+                return redirect()->to(base_url() . '/user/level');
+            } else if (empty($this->request->getPost('method'))) {
                 $this->session->setFlashdata('error', 'Metode tidak boleh kosong');
-                return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                return redirect()->to(base_url() . '/user/level');
             } else {
+                $data_post = [
+                    'level_id' => addslashes(trim(htmlspecialchars($this->request->getPost('level_id')))),
+                    'method' => addslashes(trim(htmlspecialchars($this->request->getPost('method')))),
+                ];
+
                 $method = $this->M_Base->data_where('method', 'id', $data_post['method']);
 
                 if (count($method) === 1) {
                     if ($method[0]['status'] == 'On') {
 
-                        $upgrade_id = '';
+                        $upgrade_id = date('YmdHis');
                         $level = $this->MLevel->select('id, level_name, price')->where('id', $data_post['level_id'])->first();
 
 
@@ -108,22 +108,22 @@ class Level extends BaseController {
                                     }
                                 } else {
                                     $this->session->setFlashdata('error', 'Result : ' . $result['message']);
-                                    return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                                    return redirect()->to(base_url() . '/user/level');
                                 }
                             } else {
                                 $this->session->setFlashdata('error', 'Gagal terkoneksi ke Tripay');
-                                return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                                return redirect()->to(base_url() . '/user/level');
                             }
 
                         } else if ($method[0]['provider'] == 'Manual') {
                             $payment_code = $method[0]['rek'];
                         } else {
                             $this->session->setFlashdata('error', 'Metode tidak terdaftar');
-                            return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                            return redirect()->to(base_url() . '/user/level');
                         }
 
                         if($this->MLevelUp->save([
-                            'code' => date('YmdHis'),
+                            'code' => $upgrade_id,
                             'level_id' => $level['id'],
                             'level_name' => $level['level_name'],
                             'user_id' => session('user_id'),
@@ -145,11 +145,11 @@ class Level extends BaseController {
 
                     } else {
                         $this->session->setFlashdata('error', 'Metode tidak tersedia');
-                        return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                        return redirect()->to(base_url() . '/user/level');
                     }
                 } else {
                     $this->session->setFlashdata('error', 'Metode tidak ditemukan');
-                    return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                    return redirect()->to(base_url() . '/user/level');
                 }
             }
                

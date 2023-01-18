@@ -72,16 +72,16 @@ class Games extends BaseController {
                                 $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
 
                                 if($level == 'Member'){
-                                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('id', $data_post['product'])->findAll();
                                 } else if ($level == 'Reseller') {
-                                    $product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                                    $product = $this->MProduct->select('id, games_id, product, reseller_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('id', $data_post['product'])->findAll();
                                 } else if ($level == 'VIP') {
-                                    $product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                                    $product = $this->MProduct->select('id, games_id, product, vip_price AS price, provider, sku, status, check_status, check_code, logo_url')->where('id', $data_post['product'])->findAll();
                                 } else {
-                                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                                    $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('id', $data_post['product'])->findAll();
                                 }
                             } else {
-                                $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('games_id', $games[0]['id'])->findAll();
+                                $product = $this->MProduct->select('id, games_id, product, price, provider, sku, status, check_status, check_code, logo_url')->where('id', $data_post['product'])->findAll();
                             }
 
                             
@@ -681,7 +681,8 @@ class Games extends BaseController {
                                 // ];
 
 
-                                // https://alfathan.my.id/api/game/aov/?id=xxxxx&key=xxxxx
+                                // https://alfathan.my.id/api/game/aov/?id=xxxxx&key=
+                
                                 $result = self::fetch('https://alfathan.my.id/api/game', [
                                     'api_key' => $this->M_Base->u_get('kiosweb-license'),
                                     'game'    => $games[0]['check_code'],

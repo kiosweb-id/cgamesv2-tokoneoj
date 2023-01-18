@@ -120,7 +120,7 @@ $routes->match(['get', 'post'], '/admin/level-upgrade/edit/(:num)', 'Admin\Level
 $routes->get('/admin/level-upgrade/delete/(:num)', 'Admin\LevelUpgrade::delete/$1');
 
 $routes->match(['get', 'post'], '/user/level', 'Level::index');
-$routes->post('/user/level/upgrade', 'Level::upgrade');
+$routes->match(['get', 'post'], '/user/level/upgrade', 'Level::upgrade');
 $routes->get('/user/level/upgrade-detail/(:any)', 'Level::detail/$1');
 
 /*
