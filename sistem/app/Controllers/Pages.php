@@ -170,6 +170,7 @@ class Pages extends BaseController {
                         'username' => $data_post['username'],
                         'password' => password_hash($data_post['password'], PASSWORD_DEFAULT),
                         'wa' => $data_post['wa'],
+                        'level_id' => 1,
                         'balance' => 0,
                         'status' => 'On',
                         'date_create' => date('Y-m-d G:i:s'),
