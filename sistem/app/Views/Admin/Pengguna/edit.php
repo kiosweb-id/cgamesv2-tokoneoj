@@ -35,6 +35,16 @@
 														</div>
 													</div>
 													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Level Member</label>
+														<div class="col-md-8">
+															<select class="form-control" id="level_id" name="level_id">
+																<?php foreach($level as $key => $value){ ?>
+																	<option value="<?= $value['id'] ?>" <?= $value['id'] == $account['level_id'] ? 'selected' : '' ; ?> ><?= $value['level_name'] ?></option>
+																<?php } ?>
+															</select>
+														</div>
+													</div>
+													<div class="form-group row">
 														<label class="col-form-label col-md-4 text-dark">Status</label>
 														<div class="col-md-8">
 															<select name="status" class="form-control">

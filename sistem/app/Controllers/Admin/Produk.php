@@ -80,12 +80,14 @@ class Produk extends BaseController {
         				        'games_id' => $row[0],
         				        'product' => $row[1],
         				        'price' => $row[2],
-        				        'provider' => $row[3],
-        				        'sku' => $row[4],
+                                'reseller_price' => $row[3],
+                                'vip_price' => $row[4],
+        				        'provider' => $row[5],
+        				        'sku' => $row[6],
         				        'status' => 'On',
         				        'check_status' => 'Y',
         				        'check_code' => '',
-        				        'logo_url' => $row[5],
+        				        'logo_url' => $row[7],
         				    ]);
         				    
         				    $insert++;

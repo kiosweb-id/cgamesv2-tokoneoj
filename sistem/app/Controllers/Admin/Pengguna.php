@@ -40,6 +40,7 @@ class Pengguna extends BaseController {
             $data_post = [
                 'username' => addslashes(trim(htmlentities($this->request->getPost('username')))),
                 'password' => addslashes(trim(htmlentities($this->request->getPost('password')))),
+                'level_id' => 1,
                 'balance' => addslashes(trim(htmlentities($this->request->getPost('balance')))),
                 'wa' => addslashes(trim(htmlentities($this->request->getPost('wa')))),
             ];
@@ -87,6 +88,7 @@ class Pengguna extends BaseController {
 
         $data = array_merge($this->base_data, [
             'title' => 'Tambah Pengguna',
+            'level' => $this->MLevel->findAll(),
         ]);
 
         return view('Admin/Pengguna/add', $data);
@@ -114,6 +116,7 @@ class Pengguna extends BaseController {
                         'balance' => addslashes(trim(htmlspecialchars($this->request->getPost('balance')))),
                         'status' => addslashes(trim(htmlspecialchars($this->request->getPost('status')))),
                         'wa' => addslashes(trim(htmlspecialchars($this->request->getPost('wa')))),
+                        'level_id' => addslashes(trim(htmlentities($this->request->getPost('level_id')))),
                     ];
 
                     if (empty($data_post['status']) OR empty($data_post['wa'])) {
@@ -133,6 +136,7 @@ class Pengguna extends BaseController {
                 $data = array_merge($this->base_data, [
                     'title' => 'Edit Pengguna',
                     'account' => $account[0],
+                    'level' => $this->MLevel->findAll(),
                 ]);
 
                 return view('Admin/Pengguna/edit', $data);
