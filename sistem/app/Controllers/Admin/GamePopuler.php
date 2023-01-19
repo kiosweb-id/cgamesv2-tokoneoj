@@ -51,7 +51,7 @@ class GamePopuler extends BaseController {
 
         $Id = $this->MGamePop->select('game_id')->findAll();
 
-        $rows = [];
+        $rows = [0];
         foreach ($Id as $key => $value){
             $rows [] = $value['game_id'];
         }
