@@ -64,6 +64,17 @@
 														</div>
 													</div>
 													<div class="form-group row">
+														<label class="col-form-label col-md-4 text-dark">Kategori</label>
+														<div class="col-md-8">
+															<select name="category" class="form-control">
+																<option value="E-Wallet">E-Wallet</option>
+																<option value="Bank Transfer">Bank Transfer</option>
+																<option value="Virtual Account">Virtual Account</option>
+																<option value="Convenience Store">Convenience Store</option>
+															</select>
+														</div>
+													</div>
+													<div class="form-group row">
 														<label class="col-form-label col-md-4 text-dark">Instruksi</label>
 														<div class="col-md-8">
 															<textarea name="instruksi"></textarea>

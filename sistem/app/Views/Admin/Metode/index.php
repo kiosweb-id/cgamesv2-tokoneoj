@@ -35,11 +35,12 @@
 										<?= alert(); ?>
 									</div>
 									<div class="table-responsive">
-										<table class="table-white table table-striped">
+										<table id="datatable" class="table-white table table-striped">
 											<tr class="bg-primary text-white">
 												<th width="10">No</th>
 												<th>Metode</th>
 												<th>Provider</th>
+												<th>Kategori</th>
 												<th>Kode Unik</th>
 												<th>Status</th>
 												<th>Action</th>
@@ -54,6 +55,9 @@
 												<td>
 													<?= $loop['provider']; ?>
 													<p class="m-0"><?= $loop['code']; ?></p>
+												</td>
+												<td>
+													<?= $loop['category']; ?>
 												</td>
 												<td>
 													<?php

@@ -51,6 +51,7 @@ class Metode extends BaseController {
                 'code' => addslashes(trim(htmlspecialchars($this->request->getPost('code')))),
                 'uniq' => addslashes(trim(htmlspecialchars($this->request->getPost('uniq')))),
                 'rek' => addslashes(trim(htmlspecialchars($this->request->getPost('rek')))),
+                'category' => addslashes(trim(htmlspecialchars($this->request->getPost('category')))),
                 'instruksi' => addslashes(trim(htmlspecialchars($this->request->getPost('instruksi')))),
             ];
 
@@ -107,6 +108,7 @@ class Metode extends BaseController {
                         'uniq' => addslashes(trim(htmlspecialchars($this->request->getPost('uniq')))),
                         'status' => addslashes(trim(htmlspecialchars($this->request->getPost('status')))),
                         'rek' => addslashes(trim(htmlspecialchars($this->request->getPost('rek')))),
+                        'category' => addslashes(trim(htmlspecialchars($this->request->getPost('category')))),
                         'instruksi' => addslashes(trim(htmlspecialchars($this->request->getPost('instruksi')))),
                     ];
 
