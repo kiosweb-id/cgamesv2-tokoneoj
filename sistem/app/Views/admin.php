@@ -94,6 +94,13 @@
                     <i class="fas fa-fw fa-gamepad"></i>
                     <span>Kelola Games</span></a>
             </li>
+
+             <!-- Nav Item - Games -->
+             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url(); ?>/admin/gamepopuler">
+                    <i class="fas fa-fw fa-fire"></i>
+                    <span>Kelola Games Populer</span></a>
+            </li>
             
             <!-- Nav Item - Kategori -->
             <li class="nav-item">

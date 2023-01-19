@@ -63,6 +63,10 @@ $routes->match(['get', 'post'], '/admin/games/add', 'Admin\Games::add');
 $routes->match(['get', 'post'], '/admin/games/edit/(:num)', 'Admin\Games::edit/$1');
 $routes->match(['get', 'post'], '/admin/games/delete/(:num)', 'Admin\Games::delete/$1');
 
+$routes->match(['get', 'post'], '/admin/gamepopuler', 'Admin\GamePopuler::index');
+$routes->match(['get', 'post'], '/admin/gamepopuler/add', 'Admin\GamePopuler::add');
+$routes->match(['get', 'post'], '/admin/gamepopuler/delete/(:num)', 'Admin\GamePopuler::delete/$1');
+
 $routes->match(['get', 'post'], '/admin/kategori', 'Admin\Kategori::index');
 $routes->match(['get', 'post'], '/admin/kategori/add', 'Admin\Kategori::add');
 $routes->match(['get', 'post'], '/admin/kategori/edit/(:num)', 'Admin\Kategori::edit/$1');

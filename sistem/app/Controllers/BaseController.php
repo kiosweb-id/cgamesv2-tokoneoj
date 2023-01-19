@@ -17,6 +17,8 @@ use App\Models\ProductModel;
 use App\Models\PriceModel;
 use App\Models\OrderModel;
 use App\Models\TopUpModel;
+use App\Models\GameModel;
+use App\Models\GamePopulerModel;
 
 /**
  * Class BaseController
@@ -66,6 +68,8 @@ abstract class BaseController extends Controller {
         $this->MPrice = new PriceModel;
         $this->MOrder = new OrderModel;
         $this->MTopUp = new TopUpModel;
+        $this->MGame = new GameModel;
+        $this->MGamePop = new GamePopulerModel;
 
         if (preg_match("/webzip|httrack|wget|FlickBot|downloader|production
         bot|superbot|PersonaPilot|NPBot|WebCopier|vayala|imagefetch|
@@ -118,7 +122,7 @@ abstract class BaseController extends Controller {
                 'tw' => $this->M_Base->u_get('sm-tw'),
             ],
             'menu_active' => 'Home',
-            'games_populer' => $this->M_Base->all_data('games', 6),
+            'games_populer' => $this->MGamePop->select('games.games AS name, games.slug, games.image AS image, game_populer.*')->join('games', 'games.id = game_populer.game_id')->findAll(),
             'sosmed' => $this->M_Base->all_data('sosmed'),
         ];
     }
