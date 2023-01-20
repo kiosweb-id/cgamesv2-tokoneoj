@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 class Games extends BaseController {
-    protected $tripay_base = 'https://tripay.co.id/api-sanbox/';
+    protected $tripay_base = 'https://tripay.co.id/api-sandbox/';
 
     public function index($slug = null) {
         if ($slug) {
