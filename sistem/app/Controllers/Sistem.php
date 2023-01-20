@@ -27,7 +27,7 @@ class Sistem extends BaseController {
 						if ($data['status'] === 'PAID') {
 							$orders = $this->M_Base->data_where_array('orders', [
 								'order_id' => $id,
-								'status' => 'Pending'
+								'status' => 'Success'
 							]);
 
 							if (count($orders) === 1) {
