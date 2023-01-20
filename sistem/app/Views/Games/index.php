@@ -259,6 +259,10 @@
 
                                                         </div>
 
+                                                        <div class="bg-white p-2 text-end border-top" style="border-radius: 0 0 6px 6px;">
+                                                            <img src="<?= base_url(); ?>/assets/images/method/balance.png" alt="" width="64">
+                                                        </div>
+
                                                     </div>
 
 
@@ -330,6 +334,20 @@
 
                                                         </div>
 
+                                                        <div class="bg-white p-2 text-end border-top" style="border-radius: 0 0 6px 6px;">
+                                                            
+                                                        <?php foreach ($method as $loop): ?>
+                                                        
+                                                        <?php if($loop['category'] == 'E-Wallet') { ?>
+                                                        
+                                                            <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" alt="" width="64">
+                                                        
+                                                        <?php } ?>
+
+                                                        <?php endforeach ?>
+                                                        
+                                                        </div>
+
                                                     </div>
 
 
@@ -397,6 +415,20 @@
 
                                                             </div>
 
+                                                        </div>
+
+                                                        <div class="bg-white p-2 text-end border-top" style="border-radius: 0 0 6px 6px;">
+                                                            
+                                                        <?php foreach ($method as $loop): ?>
+                                                        
+                                                        <?php if($loop['category'] == 'Bank Transfer') { ?>
+                                                        
+                                                            <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" alt="" width="64">
+                                                        
+                                                        <?php } ?>
+
+                                                        <?php endforeach ?>
+                                                        
                                                         </div>
 
                                                     </div>
@@ -468,6 +500,20 @@
 
                                                         </div>
 
+                                                        <div class="bg-white p-2 text-end border-top" style="border-radius: 0 0 6px 6px;">
+                                                            
+                                                        <?php foreach ($method as $loop): ?>
+                                                        
+                                                        <?php if($loop['category'] == 'Virtual Account') { ?>
+                                                        
+                                                            <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" alt="" width="64">
+                                                        
+                                                        <?php } ?>
+
+                                                        <?php endforeach ?>
+                                                        
+                                                        </div>
+
                                                     </div>
 
 
@@ -537,6 +583,20 @@
 
                                                         </div>
 
+                                                        <div class="bg-white p-2 text-end border-top" style="border-radius: 0 0 6px 6px;">
+                                                            
+                                                        <?php foreach ($method as $loop): ?>
+                                                        
+                                                        <?php if($loop['category'] == 'Convenience Store') { ?>
+                                                        
+                                                            <img src="<?= base_url(); ?>/assets/images/method/<?= $loop['image']; ?>" alt="" width="64">
+                                                        
+                                                        <?php } ?>
+
+                                                        <?php endforeach ?>
+                                                        
+                                                        </div>
+
                                                     </div>
 
                                                     
@@ -579,7 +639,10 @@
 
                                             </small>
 
-                                            <button type="button" class="btn btn-primary text-white" onclick="process_order();">Beli Sekarang</button>
+                                            <button type="button" class="btn btn-primary text-white" onclick="process_order();">
+                                                <i class="fas fa-solid fa-cart-plus"></i>
+                                                Beli Sekarang
+                                            </button>
 
                                         </div>
 

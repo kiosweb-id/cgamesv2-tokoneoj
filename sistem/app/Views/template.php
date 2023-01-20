@@ -33,6 +33,9 @@
                 --warna_3: #ff9800;
                 --warna_4: #141E61;
             }
+            .text-end {
+                text-align: end !important;
+            }
             .content {
                 padding-top: 110px;
                 min-height: 446px;
