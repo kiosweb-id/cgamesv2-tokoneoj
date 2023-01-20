@@ -19,7 +19,7 @@ class Kategori extends BaseController {
 
         if ($this->request->getPost('tombol')) {
             $data_post = [
-                'icdon' => $this->request->getPost('icon'),
+                'icon' => $this->request->getPost('icon'),
                 'category' => addslashes(trim(htmlspecialchars($this->request->getPost('category')))),
                 'sort' => addslashes(trim(htmlspecialchars($this->request->getPost('sort')))),
             ];
