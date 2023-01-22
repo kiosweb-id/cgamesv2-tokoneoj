@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 class Games extends BaseController {
-    protected $tripay_base = 'https://tripay.co.id/api-sandbox/';
 
     public function index($slug = null) {
         if ($slug) {
@@ -108,15 +107,17 @@ class Games extends BaseController {
                                             if ($this->users == false) {
                                                 $username = '';
                                                 $username_tripay = 'Default';
+                                                $username_ipaymu = 'Default';
                                             } else {
                                                 $username = $this->users['username'];
                                                 $username_tripay = $this->users['username'];
+                                                $username_ipaymu = $this->users['username'];
                                             }
 
                                             $status = 'Pending';
                                             $ket = 'Menunggu Pembayaran';
 
-                                            $order_id = date('Ymd') . rand(0000,9999);
+                                            $order_id = 'TP' .date('Ymd') . rand(0000,9999);
 
                                             // $find_price = $this->M_Base->data_where_array('price', [
                                             //     'method_id' => $data_post['method'],
@@ -221,13 +222,13 @@ class Games extends BaseController {
                                                     $body['phone']      = $data_post['wa'];
                                                     $body['email']      = 'email@domain.com';
                                                     $body['amount']     = $price;
-                                                    $body['referenceId']= rand(0000000,999999);
+                                                    $body['referenceId']= $order_id;
                                                     $body['product']    = array($product[0]['product']);
                                                     $body['qty']        = array('1');
                                                     $body['price']      = array($price);
                                                     $body['returnUrl']  = base_url();
                                                     $body['cancelUrl']  = base_url();
-                                                    $body['notifyUrl']  = base_url() . '/sistem/callback/ipaymu';
+                                                    $body['notifyUrl']  = $this->ipaymu_notify;
                                                     $body['paymentMethod']  = $ex_method[0];
                                                     $body['paymentChannel']  = $ex_method[1];
                                                     
@@ -237,7 +238,7 @@ class Games extends BaseController {
                                                     $timestamp    = Date('YmdHis');
                                                     
                                                     curl_setopt_array($curl, array(
-                                                        CURLOPT_URL => 'https://my.ipaymu.com/api/v2/payment/direct',
+                                                        CURLOPT_URL => $this->ipaymu_base .'api/v2/payment/direct',
                                                         CURLOPT_RETURNTRANSFER => true,
                                                         CURLOPT_ENCODING => '',
                                                         CURLOPT_MAXREDIRS => 10,
@@ -381,7 +382,8 @@ class Games extends BaseController {
                                                 return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
                                             }
 
-                                            $this->M_Base->data_insert('orders', [
+
+                                            $data = [
                                                 'order_id' => $order_id,
                                                 'username' => $username,
                                                 'wa' => $data_post['wa'],
@@ -403,7 +405,9 @@ class Games extends BaseController {
                                                 'date' => date('Y-m-d'),
                                                 'date_create' => date('Y-m-d G:i:s'),
                                                 'date_process' => date('Y-m-d G:i:s'),
-                                            ]);
+                                            ];
+
+                                            $this->M_Base->data_insert('orders', $data);
 
                                             $data_wa = [
                                                 'wa' => $data_post['wa'],

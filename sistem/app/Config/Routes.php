@@ -119,6 +119,9 @@ $routes->match(['get', 'post'], '/sistem/callback/(:any)', 'Sistem::callback/$1'
 $routes->match(['get', 'post'], '/admin/level', 'Admin\Level::index');
 $routes->match(['get', 'post'], '/admin/level/edit/(:any)', 'Admin\Level::edit/$1');
 
+$routes->match(['get', 'post'], '/admin/mutasi', 'Admin\Mutasi::index');
+$routes->match(['get', 'post'], '/admin/mutasi/filter', 'Admin\Mutasi::filter');
+
 $routes->match(['get', 'post'], '/admin/level-upgrade', 'Admin\LevelUpgrade::index');
 $routes->match(['get', 'post'], '/admin/level-upgrade/edit/(:num)', 'Admin\LevelUpgrade::edit/$1');
 $routes->get('/admin/level-upgrade/delete/(:num)', 'Admin\LevelUpgrade::delete/$1');

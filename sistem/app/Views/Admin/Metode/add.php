@@ -59,6 +59,7 @@
 														<label class="col-form-label col-md-4 text-dark">Kode Metode</label>
 														<div class="col-md-8">
 															<input type="text" class="form-control" autocomplete="off" name="code">
+															<small>Kode metode manual <a href="https://postimg.cc/Tpv0bXwT" class="text-warning" target="_blank">disini</a></small> <br>
 															<small>Kode metode Tripay bisa di cek <a href="https://tripay.co.id/developer?tab=channels" class="text-warning" target="_blank">disini</a></small> <br>
 															<small>Kode metode iPaymu bisa di cek <a href="https://i.postimg.cc/L6gzmTXN/image-2022-09-25-184142534.png" class="text-warning" target="_blank">disini</a>. Gunakan 2 kode metode yang digabung dengan tanda titik (.). Contoh : <code>va.bri</code></small> <br>
 														</div>
@@ -94,15 +95,16 @@
 				
 				<?php $this->section('js'); ?>
 				<script>
-					$("select[name=provider]").on('change', function() {
-						if ($(this).val() == 'Manual') {
-							$("#tipe-manual").removeClass('d-none');
-							$("#tipe-tripay").addClass('d-none');
-						} else {
-							$("#tipe-manual").addClass('d-none');
-							$("#tipe-tripay").removeClass('d-none');
-						}
-					});
+					$("#tipe-tripay").removeClass('d-none');
+					// $("select[name=provider]").on('change', function() {
+					// 	if ($(this).val() == 'Manual') {
+					// 		$("#tipe-manual").removeClass('d-none');
+					// 		$("#tipe-tripay").addClass('d-none');
+					// 	} else {
+					// 		$("#tipe-manual").addClass('d-none');
+					// 		$("#tipe-tripay").removeClass('d-none');
+					// 	}
+					// });
 					$(".custom-file-input").on("change", function() {
 						var fileName = $(this).val().split("\\").pop();
 						$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
