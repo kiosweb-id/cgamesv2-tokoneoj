@@ -12,10 +12,6 @@ class Level extends BaseController {
             $this->session->setFlashdata('error', 'Silahkan login dahulu');
             return redirect()->to(base_url() . '/admin/login');
         }
-        
-        if (!in_array('Pengguna', explode(',', $this->admin['permission']))) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        }
 
         $data = array_merge($this->base_data, [
             'title' => 'Level',

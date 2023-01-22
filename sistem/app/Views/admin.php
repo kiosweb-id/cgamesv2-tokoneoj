@@ -66,6 +66,13 @@
             <div class="sidebar-heading">
                 Management
             </div>
+
+            <!-- Nav Item - Admin -->
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url(); ?>/admin/mutasi">
+                <i class="fas fa-fw fa-money-check-alt"></i>
+                    <span>Kelola Mutasi Bank</span></a>
+            </li>
             
             <!-- Nav Item - Admin -->
             <li class="nav-item">
@@ -73,6 +80,7 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Kelola Admin</span></a>
             </li>
+            
 
             <!-- Nav Item - Member -->
             <li class="nav-item">
@@ -314,6 +322,7 @@
       });
     </script>
         <script>
+            $('#datatable').DataTable();
             // $(document).ready(function() {
             //     $('#default-datatable').DataTable();
             // });

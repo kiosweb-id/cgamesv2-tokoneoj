@@ -19,6 +19,7 @@ use App\Models\OrderModel;
 use App\Models\TopUpModel;
 use App\Models\GameModel;
 use App\Models\GamePopulerModel;
+use App\Models\MethodModel;
 
 /**
  * Class BaseController
@@ -70,6 +71,11 @@ abstract class BaseController extends Controller {
         $this->MTopUp = new TopUpModel;
         $this->MGame = new GameModel;
         $this->MGamePop = new GamePopulerModel;
+        $this->MMethod = new MethodModel;
+
+        $this->tripay_base = 'https://tripay.co.id/api/';
+        $this->ipaymu_base = 'https://my.ipaymu.com/';
+        $this->ipaymu_notify = base_url() . '/sistem/callback/ipaymu';
 
         if (preg_match("/webzip|httrack|wget|FlickBot|downloader|production
         bot|superbot|PersonaPilot|NPBot|WebCopier|vayala|imagefetch|

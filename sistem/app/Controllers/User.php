@@ -123,7 +123,7 @@ class User extends BaseController {
                         if (count($method) === 1) {
                             if ($method[0]['status'] == 'On') {
 
-                                $topup_id = date('Ymd') . rand(0000,9999);
+                                $topup_id = 'DS' .date('Ymd') . rand(0000,9999);
 
                                 $uniq = $method[0]['uniq'] == 'Y' ? rand(000,999) : 0;
 
@@ -136,7 +136,7 @@ class User extends BaseController {
                                         'merchant_ref'   => $topup_id,
                                         'amount'         => $amount,
                                         'customer_name'  => $this->users['username'],
-                                        'customer_email' => 'email@domain.com',
+                                        'customer_email' => 'email@email.com',
                                         'customer_phone' => $this->users['wa'],
                                         'order_items'    => [
                                             [
@@ -155,7 +155,7 @@ class User extends BaseController {
 
                                     curl_setopt_array($curl, [
                                         CURLOPT_FRESH_CONNECT  => true,
-                                        CURLOPT_URL            => 'https://tripay.co.id/api/transaction/create',
+                                        CURLOPT_URL            => $this->tripay_base . 'transaction/create',
                                         CURLOPT_RETURNTRANSFER => true,
                                         CURLOPT_HEADER         => false,
                                         CURLOPT_HTTPHEADER     => ['Authorization: Bearer '.$this->M_Base->u_get('tripay-key')],
@@ -184,6 +184,73 @@ class User extends BaseController {
                                         return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
                                     }
 
+                                } else if($method[0]['provider'] == 'iPaymu'){
+                                    $ex_method = explode('.', $method[0]['code']);
+                                                
+                                    if (count($ex_method) == 2) {
+                                        
+                                        $va = $this->M_Base->u_get('ip_va');
+                                        $secret_ipaymu = $this->M_Base->u_get('ip_secret');
+                                        
+                                        $curl = curl_init();
+                                        
+                                        $body['name']       = $this->users['username'];
+                                        $body['phone']      = $this->users['wa'];
+                                        $body['email']      = 'email@email.com';
+                                        $body['amount']     = $amount;
+                                        $body['referenceId']= $topup_id;
+                                        $body['product']    = array('Topup Saldo');
+                                        $body['qty']        = array('1');
+                                        $body['price']      = array($amount);
+                                        $body['returnUrl']  = base_url();
+                                        $body['cancelUrl']  = base_url();
+                                        $body['notifyUrl']  = $this->ipaymu_notify;
+                                        $body['paymentMethod']  = $ex_method[0];
+                                        $body['paymentChannel']  = $ex_method[1];
+                                        
+                                        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+                                        $requestBody  = strtolower(hash('sha256', $jsonBody));
+                                        $stringToSign = strtoupper('POST') . ':' . $va . ':' . $requestBody . ':' . $secret_ipaymu;
+                                        $timestamp    = Date('YmdHis');
+                                        
+                                        curl_setopt_array($curl, array(
+                                            CURLOPT_URL => $this->ipaymu_base .'api/v2/payment/direct',
+                                            CURLOPT_RETURNTRANSFER => true,
+                                            CURLOPT_ENCODING => '',
+                                            CURLOPT_MAXREDIRS => 10,
+                                            CURLOPT_TIMEOUT => 0,
+                                            CURLOPT_FOLLOWLOCATION => true,
+                                            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                            CURLOPT_CUSTOMREQUEST => 'POST',
+                                            CURLOPT_POSTFIELDS => $jsonBody,
+                                            CURLOPT_HTTPHEADER => array(
+                                                'Content-Type: application/json',
+                                                'signature: ' . hash_hmac('sha256', $stringToSign, $secret_ipaymu),
+                                                'va: ' . $va,
+                                                'timestamp: ' . $timestamp
+                                            ),
+                                        ));
+                                        
+                                        $response = curl_exec($curl);
+                                        $response = json_decode($response, true);
+                                        
+                                        if ($response) {
+                                            if ($response['Status'] == 200) {
+                                        
+                                                $payment_code = $response['Data']['PaymentNo'];
+                                        
+                                            } else {
+                                                $this->session->setFlashdata('error', 'iPaymu : ' . $response['Message']);
+                                                return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                                            }
+                                        } else {
+                                            $this->session->setFlashdata('error', 'Gagal terkoneksi ke iPaymu');
+                                            return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                                        }
+                                    } else {
+                                        $this->session->setFlashdata('error', 'Kode metode tidak sesuai');
+                                        return redirect()->to(str_replace('index.php/', '', site_url(uri_string())));
+                                    }
                                 } else if ($method[0]['provider'] == 'Manual') {
                                     $payment_code = $method[0]['rek'];
                                 } else {

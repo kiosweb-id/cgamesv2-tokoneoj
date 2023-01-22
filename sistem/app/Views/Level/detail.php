@@ -43,7 +43,7 @@
 					                        <div class="col-sm-6">
 					                            <div class="pb-4"> No. Transaksi 
 					                            	<h5>
-					                            		TP<?= $level_up['code']; ?> <i class="fa fa-clone pl-2 clip" onclick="copy_trxaku()" data-clipboard-text="TP<?= $level_up['id']; ?>"></i>
+					                            		<?= $level_up['code']; ?> <i class="fa fa-clone pl-2 clip" onclick="copy_trxaku()" data-clipboard-text="<?= $level_up['id']; ?>"></i>
 					                                </h5>
 					                            </div>
 					                            <div class="pb-4"> 

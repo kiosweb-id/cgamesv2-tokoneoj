@@ -20,6 +20,7 @@
 			                    <h5>Top Up</h5>
 			                    <span class="strip-primary"></span>
 			                </div>
+							<?= alert(); ?>
 			                <div class="pb-3">
 			                    <div class="section">
 			                        <div class="card-body">
