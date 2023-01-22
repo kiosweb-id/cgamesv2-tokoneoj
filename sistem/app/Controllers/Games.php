@@ -693,6 +693,8 @@ class Games extends BaseController {
                                     'user_id' => $data_post['user_id'],
                                     'zone_id' => $data_post['zone_id']
                                 ]);
+
+                                // print_r($result); die();
                                 
                                 if (isset($result->result)) {
                                     
@@ -700,6 +702,10 @@ class Games extends BaseController {
                                         $gusername = "ID Akun tidak ditemukan";
                                         if (isset($result->nickname) && $result->nickname != '') {
                                             $gusername = $result->nickname;
+                                        } else {
+                                            if ($games[0]['check_code'] == 'apex') {
+                                                $gusername = $data_post['user_id'];
+                                            }
                                         }
                                         
                                         echo json_encode([
@@ -875,7 +881,7 @@ class Games extends BaseController {
         $game = str_replace(' ', '', strtolower($data['game']));
    		
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL, 'https://alfathan.my.id/api/game/'. $game .'/?id=' . $data['user_id'] . '&zone='. $data['zone_id'] .'&server=' . $data['zone_id'] . '&key=' . $data['api_key']);
+        curl_setopt($ch,CURLOPT_URL, 'https://alfathan.my.id/api/game/'. $game .'/?id=' . str_replace('#', '%23', $data['user_id']) . '&zone='. $data['zone_id'] .'&server=' . $data['zone_id'] . '&key=' . $data['api_key']);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
         

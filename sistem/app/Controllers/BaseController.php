@@ -20,6 +20,7 @@ use App\Models\TopUpModel;
 use App\Models\GameModel;
 use App\Models\GamePopulerModel;
 use App\Models\MethodModel;
+use App\Models\WhatsappModel;
 
 /**
  * Class BaseController
@@ -72,6 +73,7 @@ abstract class BaseController extends Controller {
         $this->MGame = new GameModel;
         $this->MGamePop = new GamePopulerModel;
         $this->MMethod = new MethodModel;
+        $this->MWa = new WhatsappModel;
 
         $this->tripay_base = 'https://tripay.co.id/api/';
         $this->ipaymu_base = 'https://my.ipaymu.com/';

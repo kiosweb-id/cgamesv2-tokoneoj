@@ -195,7 +195,7 @@ class Pages extends BaseController {
     }
 
     public function logout() {
-
+        session_destroy();
         $this->session->remove('username');
 
         $this->session->setFlashdata('success', 'Logout berhasil');
