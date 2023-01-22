@@ -6,18 +6,15 @@
 				<?php $this->section('content'); ?>
 				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pengaturan Umum</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pengaturan API</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="messages-tab" data-toggle="tab" data-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Pengaturan Syarat & Ketentuan</button>
-				</li>
-				<!-- <li class="nav-item" role="presentation">
-					<button class="nav-link" id="settings-tab" data-toggle="tab" data-target="#settings" type="button" role="tab" aria-controls="settings" aria-selected="false">Settings</button>
-				</li> -->
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pengaturan Umum</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Pengaturan API</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="messages-tab" data-toggle="tab" data-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Pengaturan Syarat & Ketentuan</button>
+					</li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -79,56 +76,6 @@
 							</div>
 						</div>
 						 
-						<!--
-							<div class="row">
-								<div class="col-lg-12 mx-auto">
-								<!-- Social Media 
-								<div class="card shadow mb-4">
-								<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Social Media</h6>
-								</div>
-								<div class="card-body">
-									<form action="" method="POST">
-										<div class="form-group row">
-											<label class="col-md-4 col-form-label text-dark">Whatsapp</label>
-											<div class="col-md-8">
-												<input type="url" class="form-control" value="<?= $sm['wa']; ?>" name="wa" autocomplete="off">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-md-4 col-form-label text-dark">Instagram</label>
-											<div class="col-md-8">
-												<input type="url" class="form-control" value="<?= $sm['ig']; ?>" name="ig" autocomplete="off">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-md-4 col-form-label text-dark">YouTube</label>
-											<div class="col-md-8">
-												<input type="url" class="form-control" value="<?= $sm['yt']; ?>" name="yt" autocomplete="off">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-md-4 col-form-label text-dark">Facebook</label>
-											<div class="col-md-8">
-												<input type="url" class="form-control" value="<?= $sm['fb']; ?>" name="fb" autocomplete="off">
-											</div>
-										</div>
-										<div class="form-group row">
-											<label class="col-md-4 col-form-label text-dark">Twitter</label>
-											<div class="col-md-8">
-												<input type="url" class="form-control" value="<?= $sm['tw']; ?>" name="tw" autocomplete="off">
-											</div>
-										</div>
-										<div class="text-right">
-											<button class="btn text-dark" type="reset">Batal</button>
-											<button class="btn btn-primary" type="submit" name="tombol" value="sm">Simpan</button>
-										</div>
-									</form>
-								</div>
-							</div>
-							</div>
-						</div>
-						--> 
 
 						<div class="row">
 							<div class="col-lg-12 mx-auto">
@@ -160,7 +107,7 @@
 						</div>
 						
 						<div class="row">
-								<div class="col-lg-12 mx-auto">
+							<div class="col-lg-12 mx-auto">
 								<!-- Banner -->
 								<div class="card shadow mb-4">
 									<div class="card-header py-3">
@@ -218,12 +165,12 @@
 
 
 					<div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-					<div class="row mt-2">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- DigiFlazz -->
-                                 <div class="card shadow mb-4">
+						<div class="row mt-2">
+                            <div class="col-lg-12 mx-auto">
+                                <!-- DigiFlazz -->
+                                <div class="card shadow mb-4">
 								    <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Digiflazz</h6>
+                                    	<h6 class="m-0 font-weight-bold text-primary">Digiflazz</h6>
                                     </div>
 									<div class="card-body">
 										<form action="" method="POST">
@@ -246,13 +193,13 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
+						</div>
 							
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- ApiGames -->
-                                 <div class="card shadow mb-4">
+						<div class="row">
+                            <div class="col-lg-12 mx-auto">
+                                <!-- ApiGames -->
+                                <div class="card shadow mb-4">
 								    <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Api Games</h6>
                                     </div>
@@ -277,11 +224,11 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
+						</div>
 							
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
+						<div class="row">
+                            <div class="col-lg-12 mx-auto">
                                  <!-- Tripay -->
                                  <div class="card shadow mb-4">
 								    <div class="card-header py-3">
@@ -315,12 +262,12 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- Tripay -->
-                                 <div class="card shadow mb-4">
+						</div>
+						<div class="row">
+							<div class="col-lg-12 mx-auto">
+							<!-- Tripay -->
+                                <div class="card shadow mb-4">
 								    <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">iPaymu</h6>
                                     </div>
@@ -346,12 +293,12 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- Tripay -->
-                                 <div class="card shadow mb-4">
+						</div>
+						<div class="row">
+							<div class="col-lg-12 mx-auto">
+								<!-- Tripay -->
+                            	 <div class="card shadow mb-4">
 								    <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Cek Mutasi</h6>
                                     </div>
@@ -377,13 +324,13 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
+						</div>
 							
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- Tripay -->
-                                 <div class="card shadow mb-4">
+						<div class="row">
+							<div class="col-lg-12 mx-auto">
+                                <!-- Tripay -->
+                                <div class="card shadow mb-4">
 								    <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Cek Validasi</h6>
                                     </div>
@@ -403,15 +350,15 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
+						</div>
 
-							<div class="row">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- Tripay -->
-                                 <div class="card shadow mb-4">
+						<div class="row">
+							<div class="col-lg-12 mx-auto">
+                                <!-- Tripay -->
+                                <div class="card shadow mb-4">
 								    <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Whatsapp Gateway Fonnte</h6>
+                                    	<h6 class="m-0 font-weight-bold text-primary">Whatsapp Gateway Fonnte</h6>
                                     </div>
 									<div class="card-body">
 										<form action="" method="POST">
@@ -429,16 +376,17 @@
 										</form>
 									</div>
 								</div>
-								</div>
 							</div>
+						</div>
 					</div>
+
 					<div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-					<div class="row mt-2">
-                                 <div class="col-lg-12 mx-auto">
-                                 <!-- SKU -->
+						<div class="row mt-2">
+							<div class="col-lg-12 mx-auto">
+							<!-- SKU -->
                                 <div class="card shadow mb-4">
 								    <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Syarat & Ketentuan</h6>
+                                    	<h6 class="m-0 font-weight-bold text-primary">Syarat & Ketentuan</h6>
                                     </div>
 									<div class="card-body">
 									    
@@ -453,19 +401,10 @@
 										</form>
 									</div>
 								</div>
-								</div>
-							</div>
-							
 							</div>
 						</div>
 					</div>
-					<!-- <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">4...</div> -->
 				</div>
-<!-- 
-				<div class="content">
-	
-							
-				</div> -->
 				<?php $this->endSection(); ?>
 				
 				<?php $this->section('js'); ?>
