@@ -396,7 +396,7 @@
                                         <li><a href="<?= base_url(); ?>/syarat-ketentuan">Syarat & Ketentuan</a></li>
                                     </ul>
                                 </div>
-                                <div class="col-lg-3 col-sm-3">
+                                <div class="col-lg-3 col-sm-3 mt-3">
                                 <h5 class="pb-2">Metode Pembayaran</h5>
                                     <div class="payment-channels-track marquee ml-1">
                                     <marquee width="100%" direction="left" scrollamount="5">
