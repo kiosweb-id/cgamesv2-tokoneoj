@@ -389,12 +389,25 @@
                                 </div>
                                 <div class="col-lg-3 col-sm-6 mt-3">
                                     <h5 class="pb-2">Halaman</h5>
-                                    <ul class="menu-list">
-                                        <li><a href="<?= base_url(); ?>/">Halaman Utama</a></li>
-                                        <li><a href="<?= base_url(); ?>/payment">Cek Pesanan</a></li>
-                                        <li><a href="<?= base_url(); ?>/price">Daftar Harga</a></li>
-                                        <li><a href="<?= base_url(); ?>/syarat-ketentuan">Syarat & Ketentuan</a></li>
-                                    </ul>
+                                    <div class="mt-3">
+                                        <a href="<?= base_url(); ?>" class="text-white text-decoration-none active">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        Halaman Utama
+                                        </a><br>
+                                        <a href="<?= base_url(); ?>/price" class="text-white text-decoration-none ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        Daftar Harga
+                                        </a><br>
+                                        <br>
+                                        <a href="<?= base_url(); ?>/payment" class="text-white text-decoration-none ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        Cek Pesanan
+                                        </a><br>
+                                        <a href="<?= base_url(); ?>/syarat-ketentuan" class="text-white text-decoration-none ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right-circle"><circle cx="12" cy="12" r="10"></circle><polyline points="12 16 16 12 12 8"></polyline><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                                        Syarat & Ketentuan
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-3">
                                 <h5 class="pb-2">Metode Pembayaran</h5>
