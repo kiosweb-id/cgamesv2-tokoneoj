@@ -68,11 +68,11 @@
             </div>
 
             <!-- Nav Item - Admin -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?= base_url(); ?>/admin/mutasi">
                 <i class="fas fa-fw fa-money-check-alt"></i>
                     <span>Kelola Mutasi Bank</span></a>
-            </li>
+            </li> -->
             
             <!-- Nav Item - Admin -->
             <li class="nav-item">

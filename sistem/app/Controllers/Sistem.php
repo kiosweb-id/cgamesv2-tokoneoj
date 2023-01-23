@@ -13,14 +13,14 @@ class Sistem extends BaseController {
 			$callbackSignature = isset($_SERVER['HTTP_X_CALLBACK_SIGNATURE']) ? $_SERVER['HTTP_X_CALLBACK_SIGNATURE'] : '';
 
 			if ($callbackSignature !== hash_hmac('sha256', $json, $this->M_Base->u_get('tripay-private'))) {
-				$this->M_Base->data_insert('callback', [
+				echo json_ecode( [
 					'signature' => $callbackSignature,
 					'data' => hash_hmac('sha256', $json, $this->M_Base->u_get('tripay-private')),
 					'status' => 'Signature Failed'
 				]);
 			} else {
 				if($_SERVER['HTTP_X_CALLBACK_EVENT'] !== 'payment_status'){
-					$this->M_Base->data_insert('callback', [
+					echo json_ecode( [
 							'signature' => $callbackSignature,
 							'data' => hash_hmac('sha256', $json, $this->M_Base->u_get('tripay-private')),
 							'status' => 'Callback Event Failed'
