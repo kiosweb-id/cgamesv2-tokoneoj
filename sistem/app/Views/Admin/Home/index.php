@@ -160,7 +160,7 @@
                                             <tbody>
                                                 <?php $no = 1; foreach($topup_terbanyak as $key => $value) { ?>
                                                     <tr>
-                                                        <td><?= $no ?></td>
+                                                        <td><?= $no++; ?></td>
                                                         <td><?= $value['username'] ?></td>
                                                         <td>Rp. <?= number_format($value['amount'], 0,',',',') ?></td>
                                                         <td><?= $value['method'] ?></td>
