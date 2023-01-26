@@ -410,16 +410,16 @@ class Games extends BaseController {
                                             $this->M_Base->data_insert('orders', $data);
 
                                             $data_wa = [
-                                                'wa' => $data_post['wa'],
                                                 'order_id' => $order_id,
+                                                'username' => $data_post['username'],
+                                                'wa' => $data_post['wa'],
                                                 'product' => $product[0]['product'],
                                                 'total_bayar' => $price * $quantity,
                                                 'method' => $method[0]['method'],
                                                 'nickname' => $data_post['username'],
-                                                'username' => $data_post['username'],
                                             ];
 
-                                            $this->sendWa($data_post['wa'], $data_wa);
+                                            $this->MWa->sendWa($data_post['wa'], $data_wa, 'Pending');
 
                                             $this->session->setFlashdata('success', 'Pesanan berhasil dibuat');
                                             return redirect()->to(base_url() . '/payment/' . $order_id);
@@ -845,35 +845,6 @@ class Games extends BaseController {
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-    }
-
-    public function sendWa($target = null, $data_wa = null) 
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.fonnte.com/send',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'target' => $target,
-                'message' => "Halo kak, \r\n\r\nBerikut adalah rincian pesanan Anda:\r\n\r\n- Produk : " . $data_wa['product'] . " \r\n- No.Invoice : " . $data_wa['order_id'] . " \r\n- Total Tagihan : " . $data_wa['total_bayar'] . " \r\n- Metode Pembayaran : " . $data_wa['method'] ."\r\n\r\nCek pesanan anda di sini ". base_url() . "/payment/" . $data_wa['order_id']  ."\r\n\r\nTerima kasih.",
-                'countryCode' => '62', //optional
-            ),
-            CURLOPT_HTTPHEADER => [
-                'Authorization:  ' . $this->M_Base->u_get('fonnte-token') . '' //change TOKEN to your actual token
-            ],
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        echo $response;
     }
     
     public static function fetch($url, $data) 

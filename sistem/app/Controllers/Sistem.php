@@ -136,12 +136,23 @@ class Sistem extends BaseController {
 									} else {
 										$ket = 'Produk tidak ditemukan';
 									}
-	
+									
 									$this->M_Base->data_update('orders', [
 										'status' => $status,
 										'ket' => $ket,
 									], $orders[0]['id']);
-	
+
+									$data_wa = [
+										'order_id' => $order_id,
+										'username' => $orders[0]['username'],
+										'wa' => $orders[0]['wa'],
+										'product' => $orders[0]['product'],
+										'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+										'method' => $orders[0]['method'],
+										'nickname' => $orders[0]['nickname'],
+									];
+									
+									$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
 								} else {
 									$topup = $this->M_Base->data_where_array('topup', [
 										'topup_id' => $id,
@@ -377,6 +388,18 @@ class Sistem extends BaseController {
 								'status' => $status,
 								'ket' => $ket,
 							], $orders[0]['id']);
+
+							$data_wa = [
+								'order_id' => $order_id,
+								'username' => $orders[0]['username'],
+								'wa' => $orders[0]['wa'],
+								'product' => $orders[0]['product'],
+								'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+								'method' => $orders[0]['method'],
+								'nickname' => $orders[0]['nickname'],
+							];
+							
+							$this->MWa->sendWa($orders[0]['wa'], $data_wa, $status);
 
 						} else {
 							$topup = $this->M_Base->data_where_array('topup', [
@@ -620,6 +643,18 @@ class Sistem extends BaseController {
 									'status' => $status,
 									'ket' => $ket,
 								], $orders[0]['id']);
+
+								$data_wa = [
+									'order_id' => $order_id,
+									'username' => $orders[0]['username'],
+									'wa' => $orders[0]['wa'],
+									'product' => $orders[0]['product'],
+									'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+									'method' => $orders[0]['method'],
+									'nickname' => $orders[0]['nickname'],
+								];
+								
+								$this->MWa->sendWa($orders[0]['wa'], $data_wa, $status);
 
 							} else {
 								$topup = $this->M_Base->data_where_array('topup', [

@@ -9,7 +9,7 @@
 							    <?= alert(); ?>
 								<div class="card shadow mb-4">
 								    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Template Pesan Wa</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary">Template Pesan Whatsapp</h6>
                                     </div>
 									<div class="card-body">
 										<!-- <a href="<?= base_url(); ?>/admin/pengguna/add" class="btn btn-primary">Tambah Level</a> -->
