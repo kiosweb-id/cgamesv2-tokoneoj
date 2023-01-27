@@ -13,7 +13,7 @@ class Sistem extends BaseController {
 			$callbackSignature = isset($_SERVER['HTTP_X_CALLBACK_SIGNATURE']) ? $_SERVER['HTTP_X_CALLBACK_SIGNATURE'] : '';
 
 			if ($callbackSignature !== hash_hmac('sha256', $json, $this->M_Base->u_get('tripay-private'))) {
-				echo json_ecode( [
+				echo json_encode( [
 					'signature' => $callbackSignature,
 					'data' => hash_hmac('sha256', $json, $this->M_Base->u_get('tripay-private')),
 					'status' => 'Signature Failed'
@@ -31,12 +31,6 @@ class Sistem extends BaseController {
 					if ($data) {
 						if (is_array($data)) {
 							$id = $data['merchant_ref'];
-
-							// $this->M_Base->data_insert('callback', [
-							// 		'signature' => $callbackSignature,
-							// 		'data' => $json,
-							// 		'status' => 'Signature Success'
-							// ]);
 
 							if ($data['status'] === 'PAID') {
 								$orders = $this->M_Base->data_where_array('orders', [
@@ -78,13 +72,20 @@ class Sistem extends BaseController {
 											curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 											curl_setopt($ch, CURLOPT_POST, 1);
 											curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-											$result = curl_exec($ch);
-											$result = json_decode($result, true);
+											$json = curl_exec($ch);
+											$result = json_decode($json, true);
+
+											// $this->M_Base->data_insert('callback', [
+											// 	'signature' => $callbackSignature,
+											// 	'data' => $json,
+											// 	'signature' => 'Signature Success'
+											// ]);
 											
 											if (isset($result['data'])) {
 												if ($result['data']['status'] == 'Gagal') {
 													$ket = $result['data']['message'];
 												} else {
+													$status = 'Success';
 													$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : ($result['data']['message'] == '' ? 'Menunggu diproses provider' : $result['data']['message']);
 	
 													echo json_encode(['success' => true]);
@@ -136,23 +137,12 @@ class Sistem extends BaseController {
 									} else {
 										$ket = 'Produk tidak ditemukan';
 									}
-									
+	
 									$this->M_Base->data_update('orders', [
 										'status' => $status,
 										'ket' => $ket,
 									], $orders[0]['id']);
-
-									$data_wa = [
-										'order_id' => $order_id,
-										'username' => $orders[0]['username'],
-										'wa' => $orders[0]['wa'],
-										'product' => $orders[0]['product'],
-										'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
-										'method' => $orders[0]['method'],
-										'nickname' => $orders[0]['nickname'],
-									];
-									
-									$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
+	
 								} else {
 									$topup = $this->M_Base->data_where_array('topup', [
 										'topup_id' => $id,
@@ -332,6 +322,7 @@ class Sistem extends BaseController {
 			                            if ($result['data']['status'] == 'Gagal') {
 			                            	$ket = $result['data']['message'];
 			                            } else {
+											$status = 'Success';
 			                                $ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 
 											echo json_encode(['success' => true]);
@@ -388,18 +379,6 @@ class Sistem extends BaseController {
 								'status' => $status,
 								'ket' => $ket,
 							], $orders[0]['id']);
-
-							$data_wa = [
-								'order_id' => $order_id,
-								'username' => $orders[0]['username'],
-								'wa' => $orders[0]['wa'],
-								'product' => $orders[0]['product'],
-								'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
-								'method' => $orders[0]['method'],
-								'nickname' => $orders[0]['nickname'],
-							];
-							
-							$this->MWa->sendWa($orders[0]['wa'], $data_wa, $status);
 
 						} else {
 							$topup = $this->M_Base->data_where_array('topup', [
@@ -643,18 +622,6 @@ class Sistem extends BaseController {
 									'status' => $status,
 									'ket' => $ket,
 								], $orders[0]['id']);
-
-								$data_wa = [
-									'order_id' => $order_id,
-									'username' => $orders[0]['username'],
-									'wa' => $orders[0]['wa'],
-									'product' => $orders[0]['product'],
-									'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
-									'method' => $orders[0]['method'],
-									'nickname' => $orders[0]['nickname'],
-								];
-								
-								$this->MWa->sendWa($orders[0]['wa'], $data_wa, $status);
 
 							} else {
 								$topup = $this->M_Base->data_where_array('topup', [
