@@ -70,9 +70,9 @@
 																<option value="default" <?= $games['target'] == 'default' ? 'selected' : ''; ?>>Default</option>
 																<option value="ml" <?= $games['target'] == 'ml' ? 'selected' : ''; ?>>Mobile Legends</option>
 																<option value="gi" <?= $games['target'] == 'gi' ? 'selected' : ''; ?>>Genshin Impact</option>
-																<option value="gi" <?= $games['target'] == 'hf' ? 'selected' : ''; ?>>Hyper Front</option>
-																<option value="gi" <?= $games['target'] == 'pgr' ? 'selected' : ''; ?>>Punishing Gray Raven</option>
-																<option value="gi" <?= $games['target'] == 'rm' ? 'selected' : ''; ?>>Ragnarok Mobile</option>
+																<option value="hf" <?= $games['target'] == 'hf' ? 'selected' : ''; ?>>Hyper Front</option>
+																<option value="pgr" <?= $games['target'] == 'pgr' ? 'selected' : ''; ?>>Punishing Gray Raven</option>
+																<option value="rm" <?= $games['target'] == 'rm' ? 'selected' : ''; ?>>Ragnarok Mobile</option>
 																<option value="joki" <?= $games['target'] == 'joki' ? 'selected' : ''; ?>>Joki - Mobile Legends</option>
 																<option value="pulsa" <?= $games['target'] == 'pulsa' ? 'selected' : ''; ?>>Pulsa / E Wallet</option>
 															</select>
