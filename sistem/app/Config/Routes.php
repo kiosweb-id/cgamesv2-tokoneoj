@@ -130,6 +130,8 @@ $routes->match(['get', 'post'], '/admin/whatsapp', 'Admin\Whatsapp::index');
 $routes->match(['get', 'post'], '/admin/whatsapp/add', 'Admin\Whatsapp::add');
 $routes->match(['get', 'post'], '/admin/whatsapp/edit/(:num)', 'Admin\Whatsapp::edit/$1');
 
+$routes->match(['get', 'post'], '/sistem/digi_status', 'Sistem::digi_status');
+
 $routes->match(['get', 'post'], '/user/level', 'Level::index');
 $routes->match(['get', 'post'], '/user/level/upgrade', 'Level::upgrade');
 $routes->get('/user/level/upgrade-detail/(:any)', 'Level::detail/$1');
