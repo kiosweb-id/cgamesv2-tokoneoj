@@ -63,6 +63,9 @@
 																<option value="default">Default</option>
 																<option value="ml">Mobile Legends</option>
 																<option value="gi">Genshin Impact</option>
+																<option value="hf">Hyper Front</option>
+																<option value="pgr">Punishing Gray Raven</option>
+																<option value="rm">Ragnarok Mobile</option>
 																<option value="joki">Joki - Mobile Legends</option>
 																<option value="pulsa">Pulsa / E Wallet</option>
 															</select>
