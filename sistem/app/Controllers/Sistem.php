@@ -209,6 +209,18 @@ class Sistem extends BaseController {
 								if (count($orders) > 0) {
 	
 									$status = 'Processing';
+
+									$data_wa = [
+										'order_id' => $id,
+										'username' => $orders[0]['username'],
+										'wa' => $orders[0]['wa'],
+										'product' => $orders[0]['product'],
+										'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+										'method' => $orders[0]['method'],
+										'nickname' => $orders[0]['nickname'],
+									];
+
+									$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
 	
 									$product = $this->M_Base->data_where('product', 'id', $orders[0]['product_id']);
 	
@@ -252,6 +264,18 @@ class Sistem extends BaseController {
 											if (isset($result['data'])) {
 												if ($result['data']['status'] == 'Gagal') {
 													$ket = $result['data']['message'];
+
+													$data_wa = [
+														'order_id' => $id,
+														'username' => $orders[0]['username'],
+														'wa' => $orders[0]['wa'],
+														'product' => $orders[0]['product'],
+														'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+														'method' => $orders[0]['method'],
+														'nickname' => $orders[0]['nickname'],
+													];
+				
+													$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
 												} else {
 													$status = 'Success';
 													$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : ($result['data']['message'] == '' ? 'Menunggu diproses provider' : $result['data']['message']);
@@ -289,32 +313,36 @@ class Sistem extends BaseController {
 											$json = curl_exec($ch);
 											$result = json_decode($json, true);
 	
-											// $curl = curl_init();
-	
-											// curl_setopt_array($curl, array(
-											// 	CURLOPT_URL => 'https://v1.apigames.id/transaksi/http-get-v1?merchant='.$this->M_Base->u_get('ag-merchant').'&secret='.$this->M_Base->u_get('ag-secret').'&produk='.$product[0]['sku'].'&tujuan='.$customer_no.'&ref=' . $orders[0]['order_id'],
-											// 	CURLOPT_RETURNTRANSFER => true,
-											// 	CURLOPT_ENCODING => '',
-											// 	CURLOPT_MAXREDIRS => 10,
-											// 	CURLOPT_TIMEOUT => 0,
-											// 	CURLOPT_FOLLOWLOCATION => true,
-											// 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-											// 	CURLOPT_CUSTOMREQUEST => 'GET',
-											// 	CURLOPT_POSTFIELDS => '',
-											// 	CURLOPT_HTTPHEADER => array(
-											// 		'Content-Type: application/x-www-form-urlencoded'
-											// 	),
-											// ));
-	
-											// $result = curl_exec($curl);
-											// $result = json_decode($result, true);
-	
 											if ($result['status'] == 0) {
 												$ket = $result['error_msg'];
+
+												$data_wa = [
+													'order_id' => $id,
+													'username' => $orders[0]['username'],
+													'wa' => $orders[0]['wa'],
+													'product' => $orders[0]['product'],
+													'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+													'method' => $orders[0]['method'],
+													'nickname' => $orders[0]['nickname'],
+												];
+			
+												$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
 											} else {
 												
 												if ($result['data']['status'] == 'Sukses') {
 													$status = 'Success';
+
+													$data_wa = [
+														'order_id' => $id,
+														'username' => $orders[0]['username'],
+														'wa' => $orders[0]['wa'],
+														'product' => $orders[0]['product'],
+														'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+														'method' => $orders[0]['method'],
+														'nickname' => $orders[0]['nickname'],
+													];
+				
+													$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
 												}
 	
 												$ket = $result['data']['sn'];
@@ -392,9 +420,22 @@ class Sistem extends BaseController {
 									'order_id' => $id,
 									'status' => 'Pending'
 								]);
+
 								
 								if (count($orders) === 1) {
-		
+									
+									$data_wa = [
+										'order_id' => $id,
+										'username' => $orders[0]['username'],
+										'wa' => $orders[0]['wa'],
+										'product' => $orders[0]['product'],
+										'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+										'method' => $orders[0]['method'],
+										'nickname' => $orders[0]['nickname'],
+									];
+	
+									$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
+									
 									$status = 'Expired';
 		
 									$this->M_Base->data_update('orders', [
@@ -465,6 +506,7 @@ class Sistem extends BaseController {
 				if ($this->request->getPost('status_code')) {
 					if ($this->request->getPost('status_code') == 1) {
 						
+						$order_id = $this->request->getPost('reference_id');
 						$orders = $this->M_Base->data_where_array('orders', [
 							'order_id' => $this->request->getPost('reference_id'),
 							'status' => 'Pending'
@@ -473,9 +515,21 @@ class Sistem extends BaseController {
 						if (count($orders) === 1) {
 
 							$status = 'Processing';
+							
+							$data_wa = [
+								'order_id' => $order_id,
+								'username' => $orders[0]['username'],
+								'wa' => $orders[0]['wa'],
+								'product' => $orders[0]['product'],
+								'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+								'method' => $orders[0]['method'],
+								'nickname' => $orders[0]['nickname'],
+							];
 
+							$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
+							
 							$product = $this->M_Base->data_where('product', 'id', $orders[0]['product_id']);
-
+							
 							if (count($product) === 1) {
 								
 								if (!empty($orders[0]['zone_id']) AND $orders[0]['zone_id'] != 1) {
@@ -510,10 +564,33 @@ class Sistem extends BaseController {
 			                        if (isset($result['data'])) {
 			                            if ($result['data']['status'] == 'Gagal') {
 			                            	$ket = $result['data']['message'];
+
+											$data_wa = [
+												'order_id' => $order_id,
+												'username' => $orders[0]['username'],
+												'wa' => $orders[0]['wa'],
+												'product' => $orders[0]['product'],
+												'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+												'method' => $orders[0]['method'],
+												'nickname' => $orders[0]['nickname'],
+											];
+				
+											$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
 			                            } else {
 											$status = 'Success';
 			                                $ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 
+											$data_wa = [
+												'order_id' => $order_id,
+												'username' => $orders[0]['username'],
+												'wa' => $orders[0]['wa'],
+												'product' => $orders[0]['product'],
+												'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+												'method' => $orders[0]['method'],
+												'nickname' => $orders[0]['nickname'],
+											];
+				
+											$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
 											echo json_encode(['success' => true]);
 			                            }
 			                        } else {
@@ -548,10 +625,34 @@ class Sistem extends BaseController {
 
 									if ($result['status'] == 0) {
 										$ket = $result['error_msg'];
+
+										$data_wa = [
+											'order_id' => $order_id,
+											'username' => $orders[0]['username'],
+											'wa' => $orders[0]['wa'],
+											'product' => $orders[0]['product'],
+											'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+											'method' => $orders[0]['method'],
+											'nickname' => $orders[0]['nickname'],
+										];
+			
+										$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
 			                        } else {
 			                        	
 			                            if ($result['data']['status'] == 'Sukses') {
 			                                $status = 'Success';
+
+											$data_wa = [
+												'order_id' => $order_id,
+												'username' => $orders[0]['username'],
+												'wa' => $orders[0]['wa'],
+												'product' => $orders[0]['product'],
+												'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+												'method' => $orders[0]['method'],
+												'nickname' => $orders[0]['nickname'],
+											];
+				
+											$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
 			                            }
 
 			                            $ket = $result['data']['sn'];
@@ -631,7 +732,19 @@ class Sistem extends BaseController {
 						
 						if (count($orders) === 1) {
 
-							$status = 'Expired';
+							$data_wa = [
+								'order_id' => $order_id,
+								'username' => $orders[0]['username'],
+								'wa' => $orders[0]['wa'],
+								'product' => $orders[0]['product'],
+								'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+								'method' => $orders[0]['method'],
+								'nickname' => $orders[0]['nickname'],
+							];
+
+							$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
+
+							$status = 'Canceled';
 
 							$this->M_Base->data_update('orders', [
 								'status' => $status,
@@ -714,7 +827,21 @@ class Sistem extends BaseController {
 								'status' => 'Pending'
 							]);
 
+							$order_id = $orders[0]['order_id'];
+
 							if (count($orders) === 1) {
+
+								$data_wa = [
+									'order_id' => $order_id,
+									'username' => $orders[0]['username'],
+									'wa' => $orders[0]['wa'],
+									'product' => $orders[0]['product'],
+									'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+									'method' => $orders[0]['method'],
+									'nickname' => $orders[0]['nickname'],
+								];
+	
+								$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Processing');
 
 								$status = 'Processing';
 
@@ -754,7 +881,20 @@ class Sistem extends BaseController {
 				                        if (isset($result['data'])) {
 				                            if ($result['data']['status'] == 'Gagal') {
 				                            	$ket = $result['data']['message'];
+
+												$data_wa = [
+													'order_id' => $order_id,
+													'username' => $orders[0]['username'],
+													'wa' => $orders[0]['wa'],
+													'product' => $orders[0]['product'],
+													'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+													'method' => $orders[0]['method'],
+													'nickname' => $orders[0]['nickname'],
+												];
+					
+												$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
 				                            } else {
+												$status = 'Success';
 				                                $ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 
 												echo json_encode(['success' => true]);
@@ -791,10 +931,32 @@ class Sistem extends BaseController {
 
 										if ($result['status'] == 0) {
 											$ket = $result['error_msg'];
+											$data_wa = [
+												'order_id' => $order_id,
+												'username' => $orders[0]['username'],
+												'wa' => $orders[0]['wa'],
+												'product' => $orders[0]['product'],
+												'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+												'method' => $orders[0]['method'],
+												'nickname' => $orders[0]['nickname'],
+											];
+				
+											$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Canceled');
 				                        } else {
 				                        	
 				                            if ($result['data']['status'] == 'Sukses') {
 				                                $status = 'Success';
+												$data_wa = [
+													'order_id' => $order_id,
+													'username' => $orders[0]['username'],
+													'wa' => $orders[0]['wa'],
+													'product' => $orders[0]['product'],
+													'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+													'method' => $orders[0]['method'],
+													'nickname' => $orders[0]['nickname'],
+												];
+					
+												$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
 				                            }
 
 				                            $ket = $result['data']['sn'];
