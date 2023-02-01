@@ -20,11 +20,27 @@
 
 			                <div class="pb-3">
 		                    	<div class="row">
+									<div class="col-md-6">
+										<div class="card">
+											<div class="card-body">
+												<p>Username</p>
+												<h4 class="m-0"><?= $users['username']; ?></h4>
+											</div>
+										</div>
+									</div>
 	                        		<div class="col-md-6">
 										<div class="card">
 											<div class="card-body">
 												<p>Saldo Saya</p>
 												<h4 class="m-0">Rp <?= number_format($users['balance'],0,',','.'); ?></h4>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="card">
+											<div class="card-body">
+												<p>Level Saya</p>
+												<h4 class="m-0"><?= $current_level ?></h4>
 											</div>
 										</div>
 									</div>
