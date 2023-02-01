@@ -62,7 +62,7 @@ class Home extends BaseController {
     		'title' => 'Administrator',
     		'total_trx_pending' => (int) count( $this->MOrder->where('status', 'Pending')->findAll()),
     		'total_trx_proses'  => (int) count( $this->MOrder->where('status', 'Processing')->findAll()),
-            'total_trx_sukses'  => (int) count( $this->MOrder->where('status', 'Sucsess')->findAll()),
+            'total_trx_sukses'  => (int) count( $this->MOrder->where('status', 'Success')->findAll()),
     		'total_trx_batal'   => (int) count( $this->MOrder->where('status', 'Canceled')->findAll()),
     		'topup_terbanyak'   => $rows,
             'total' => [
