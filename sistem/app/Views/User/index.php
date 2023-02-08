@@ -39,16 +39,16 @@
 									<div class="col-md-6">
 										<div class="card">
 											<div class="card-body">
-												<p>Level Saya</p>
-												<h4 class="m-0"><?= $current_level ?></h4>
+												<p>Pesanan Saya</p>
+												<h4 class="m-0"><?= number_format($orders,0,',','.'); ?></h4>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="card">
 											<div class="card-body">
-												<p>Pesanan Saya</p>
-												<h4 class="m-0"><?= number_format($orders,0,',','.'); ?></h4>
+												<p>Whatsapp Saya</p>
+												<h4 class="m-0"><?= $users['wa']; ?></h4>
 											</div>
 										</div>
 									</div>
