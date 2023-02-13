@@ -65,7 +65,7 @@ class Sistem extends BaseController {
 							'nickname' => $order['nickname'],
 						];
 
-						$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
+						$this->MWa->sendWa($order['wa'], $data_wa, 'Success');
 	
 					} else {
 						$ket = 'Tidak ada data';
@@ -159,7 +159,7 @@ class Sistem extends BaseController {
 							'nickname' => $order['nickname'],
 						];
 
-						$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
+						$this->MWa->sendWa($order['wa'], $data_wa, 'Success');
 
 					} else {
 						$ket = 'Tidak ada data';
