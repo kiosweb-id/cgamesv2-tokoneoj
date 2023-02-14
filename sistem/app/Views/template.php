@@ -379,11 +379,13 @@
                                     <h5 class="pb-2">Games Terpopuler</h5>
                                     <div class="row">
                                         <?php foreach ($games_populer as $loop): ?>
-                                        <div class="col-4 p-2">
-                                            <a href="<?= base_url(); ?>/games/<?= $loop['slug']; ?>">
-                                                <img src="<?= base_url(); ?>/assets/images/games/<?= $loop['image']; ?>" alt="" width="100%" style="border-radius: 10px;">
-                                            </a>
-                                        </div>
+                                            <?php if ($loop['status'] == 'On') { ?>
+                                            <div class="col-4 p-2">
+                                                <a href="<?= base_url(); ?>/games/<?= $loop['slug']; ?>">
+                                                    <img src="<?= base_url(); ?>/assets/images/games/<?= $loop['image']; ?>" alt="" width="100%" style="border-radius: 10px;">
+                                                </a>
+                                            </div>
+                                            <?php } ?>
                                         <?php endforeach ?>
                                     </div>
                                 </div>

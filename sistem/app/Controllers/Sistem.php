@@ -215,11 +215,11 @@ class Sistem extends BaseController {
 				} else {
 					$data = json_decode($json, true);
 
-					$this->M_Base->data_insert('callback', [
-						'signature' => $callbackSignature,
-						'data' => $json,
-						'signature' => 'Signature Success'
-					]);
+					// $this->M_Base->data_insert('callback', [
+					// 	'signature' => $callbackSignature,
+					// 	'data' => $json,
+					// 	'signature' => 'Signature Success'
+					// ]);
 
 					if ($data) {
 						if (is_array($data)) {
