@@ -639,7 +639,7 @@
 
                                             </small>
 
-                                            <button type="button" class="btn btn-primary text-white" onclick="process_order();">
+                                            <button type="button" class="btn btn-primary text-white" id="btn-cek" onclick="process_order();">
                                                 <i class="fas fa-solid fa-cart-plus"></i>
                                                 Beli Sekarang
                                             </button>
@@ -819,18 +819,12 @@
                             dataType: 'JSON',
 
                             beforeSend: function() {
-
-                                Swal.showLoading();
-
+                                $("#btn-cek").html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...').attr('disabled', 'disabled');
                             }, 
 
                             success: function(result) {
 
-
-
-                                Swal.hideLoading();
-
-
+                                $("#btn-cek").html('Beli Sekarang').removeAttr('disabled');
 
                                 if (result.status == true) {
 
