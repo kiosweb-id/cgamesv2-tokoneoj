@@ -25,7 +25,7 @@ class Level extends BaseController {
         		'current_level' => $this->MLevel->select('level_name')->where('id' , $this->MUser->select('level_id')->where('id', session('user_id'))->first()['level_id'])->first()['level_name'],
                 'level_list' => $this->MLevel->whereNotIn('id', $id_rules)->findAll(),
                 'histori_list' => $this->MLevelUp->findAll(),
-                'method' => $this->M_Base->all_data('method'),
+                'method' => $this->M_Base->data_where('method', 'status', 'On'),
                 'menu_active' => 'User',
             ]);
 

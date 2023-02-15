@@ -47,7 +47,7 @@ class WhatsappModel extends Model
     {
         $M_Base = new M_Base;
 
-        $username = session('username');
+        $username = $data_wa['username'] != null ? $data_wa['username'] : "-" ;
         $order_id = $data_wa['order_id'];
         $product = $data_wa['product'];
         $method = $data_wa['method'];

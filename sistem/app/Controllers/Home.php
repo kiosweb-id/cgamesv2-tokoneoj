@@ -12,6 +12,7 @@ class Home extends BaseController {
 
             $games[] = [
                 'category' => 'Pencarian',
+                'icon' => '',
                 'games' => $this->M_Base->data_like('games', 'games', $search),
             ];
         } else {

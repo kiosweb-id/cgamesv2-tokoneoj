@@ -130,7 +130,7 @@ abstract class BaseController extends Controller {
                 'tw' => $this->M_Base->u_get('sm-tw'),
             ],
             'menu_active' => 'Home',
-            'games_populer' => $this->MGamePop->select('games.games AS name, games.slug, games.image AS image, game_populer.*')->join('games', 'games.id = game_populer.game_id')->findAll(),
+            'games_populer' => $this->MGamePop->select('games.games AS name, games.slug, games.image AS image, games.status AS status, game_populer.*')->join('games', 'games.id = game_populer.game_id')->findAll(),
             'sosmed' => $this->M_Base->all_data('sosmed'),
         ];
     }

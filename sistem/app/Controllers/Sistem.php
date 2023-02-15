@@ -53,6 +53,19 @@ class Sistem extends BaseController {
 							'ket' => $ket,
 							'status' => 'Success',
 						], $order['id']);
+
+
+						$data_wa = [
+							'order_id' => $order['id'],
+							'username' => $order['username'],
+							'wa' => $order['wa'],
+							'product' => $order['product'],
+							'total_bayar' => $order['price'] * $order['quantity'],
+							'method' => $order['method'],
+							'nickname' => $order['nickname'],
+						];
+
+						$this->MWa->sendWa($order['wa'], $data_wa, 'Success');
 	
 					} else {
 						$ket = 'Tidak ada data';
@@ -128,14 +141,26 @@ class Sistem extends BaseController {
 					if ($result['data']['status'] == 'Sukses') {
 						$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 	
-						$ket = $result['data']['message'];
+						$ket = "Transaksi Success";
 						$status = 'Success';
 	
 						$this->M_Base->data_update('orders', [
 							'ket' => $ket,
 							'status' => 'Success',
 						], $order['id']);
-	
+						
+						$data_wa = [
+							'order_id' => $order['id'],
+							'username' => $order['username'],
+							'wa' => $order['wa'],
+							'product' => $order['product'],
+							'total_bayar' => $order['price'] * $order['quantity'],
+							'method' => $order['method'],
+							'nickname' => $order['nickname'],
+						];
+
+						$this->MWa->sendWa($order['wa'], $data_wa, 'Success');
+
 					} else {
 						$ket = 'Tidak ada data';
 						$status = 'False';
@@ -190,11 +215,11 @@ class Sistem extends BaseController {
 				} else {
 					$data = json_decode($json, true);
 
-					$this->M_Base->data_insert('callback', [
-						'signature' => $callbackSignature,
-						'data' => $json,
-						'signature' => 'Signature Success'
-					]);
+					// $this->M_Base->data_insert('callback', [
+					// 	'signature' => $callbackSignature,
+					// 	'data' => $json,
+					// 	'signature' => 'Signature Success'
+					// ]);
 
 					if ($data) {
 						if (is_array($data)) {
@@ -279,7 +304,19 @@ class Sistem extends BaseController {
 												} else {
 													$status = 'Success';
 													$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : ($result['data']['message'] == '' ? 'Menunggu diproses provider' : $result['data']['message']);
-	
+													
+													$data_wa = [
+														'order_id' => $id,
+														'username' => $orders[0]['username'],
+														'wa' => $orders[0]['wa'],
+														'product' => $orders[0]['product'],
+														'total_bayar' => $orders[0]['price'] * $orders[0]['quantity'],
+														'method' => $orders[0]['method'],
+														'nickname' => $orders[0]['nickname'],
+													];
+				
+													$this->MWa->sendWa($orders[0]['wa'], $data_wa, 'Success');
+
 													echo json_encode(['success' => true]);
 												}
 											} else {

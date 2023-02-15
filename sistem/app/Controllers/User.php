@@ -286,7 +286,7 @@ class User extends BaseController {
                 $data = array_merge($this->base_data, [
                     'menu_active' => 'User',
                     'title' => 'Top Up',
-                    'method' => $this->M_Base->all_data('method'),
+                    'method' => $this->M_Base->data_where('method', 'status', 'On'),
                 ]);
 
                 return view('User/Topup/index', $data);
