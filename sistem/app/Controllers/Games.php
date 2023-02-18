@@ -193,6 +193,7 @@ class Games extends BaseController {
                                                 
                                                 if ($result) {
                                                     if ($result['success'] == true) {
+                                                        $price = $price + (int) $result['data']['fee_customer'];
                                                         if (array_key_exists('qr_url', $result['data'])) {
                                                             $payment_code = $result['data']['qr_url'];
                                                         } else {
@@ -260,7 +261,7 @@ class Games extends BaseController {
                                                     
                                                     if ($response) {
                                                         if ($response['Status'] == 200) {
-                                                    
+                                                            $price = $price + (int) $response['Data']['Fee'];
                                                             $payment_code = $response['Data']['PaymentNo'];
                                                     
                                                         } else {
@@ -697,64 +698,73 @@ class Games extends BaseController {
                                 // print_r($result); die();
                                 
                                 if (isset($result->result)) {
+
                                     
-                                    if ($result->result->status == 200) {   
-                                        $gusername = "ID Akun tidak ditemukan";
-                                        if (isset($result->nickname) && $result->nickname != '') {
-                                            $gusername = $result->nickname;
+                                    if ($result->result->status == 200) {
+                                        if(isset($result->error_msg) != null){
+                                            echo json_encode([
+                                                'status' => false,
+                                                'msg' => "ID Akun tidak ditemukan",
+                                            ]);
                                         } else {
-                                            if ($games[0]['check_code'] == 'apex') {
-                                                $gusername = $data_post['user_id'];
+                                            $gusername = "ID Akun tidak ditemukan";
+                                            if (isset($result->nickname) && $result->nickname != '') {
+                                                $gusername = $result->nickname;
+                                            } else {
+                                                if ($games[0]['check_code'] == 'apex') {
+                                                    $gusername = $data_post['user_id'];
+                                                }
                                             }
-                                        }
+                                            
+                                            echo json_encode([
+                                                'status' => true,
+                                                'msg' => '
+                                                <form action="" method="POST">
+
+                                                    <input type="hidden" name="user_id" value="'.$data_post['user_id'].'">
+                                                    <input type="hidden" name="zone_id" value="'.$data_post['zone_id'].'">
+                                                    <input type="hidden" name="username" value="'.$gusername.'">
+                                                    <input type="hidden" name="method" value="'.$data_post['method'].'">
+                                                    <input type="hidden" name="product" value="'.$data_post['product'].'">
+                                                    <input type="hidden" name="wa" value="'.$data_post['wa'].'">
+                                                    <input type="hidden" name="quantity" value="'.$data_post['quantity'].'">
+
+                                                    <table style="width: 100%;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-left pt-2 pb-2">Kategori Layanan:</td>
+                                                                <td class="text-left pt-2 pb-2"> '.$games[0]['games'].'</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left pt-2 pb-2">Nominal Layanan:</td>
+                                                                <td class="text-left pt-2 pb-2"> '.$product[0]['product'].'</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left pt-2 pb-2">Nickname:</td>
+                                                                <td class="text-left pt-2 pb-2"> '.$gusername.' </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left pt-2 pb-2">UserID:</td>
+                                                                <td class="text-left pt-2 pb-2"> '.$target.'</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left pt-2 pb-2">Metode Pembayaran:</td>
+                                                                <td class="text-left pt-2 pb-2"> '.$method[0]['method'].'</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2" class="text-left pt-2 pb-2"> Pastikan data game Anda sudah benar. Kesalahan input data game bukan tanggung jawab kami. </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="text-right">
+                                                        <button class="btn text-white" type="button" data-dismiss="modal">Batal</button>
+                                                        <button class="btn btn-primary" type="submit" name="tombol" value="submit">Bayar Sekarang</button>
+                                                    </div>
+                                                </form>
+                                                ',
+                                            ]);
+                                        } 
                                         
-                                        echo json_encode([
-                                            'status' => true,
-                                            'msg' => '
-                                            <form action="" method="POST">
-
-                                                <input type="hidden" name="user_id" value="'.$data_post['user_id'].'">
-                                                <input type="hidden" name="zone_id" value="'.$data_post['zone_id'].'">
-                                                <input type="hidden" name="username" value="'.$gusername.'">
-                                                <input type="hidden" name="method" value="'.$data_post['method'].'">
-                                                <input type="hidden" name="product" value="'.$data_post['product'].'">
-                                                <input type="hidden" name="wa" value="'.$data_post['wa'].'">
-                                                <input type="hidden" name="quantity" value="'.$data_post['quantity'].'">
-
-                                                <table style="width: 100%;">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="text-left pt-2 pb-2">Kategori Layanan:</td>
-                                                            <td class="text-left pt-2 pb-2"> '.$games[0]['games'].'</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-left pt-2 pb-2">Nominal Layanan:</td>
-                                                            <td class="text-left pt-2 pb-2"> '.$product[0]['product'].'</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-left pt-2 pb-2">Nickname:</td>
-                                                            <td class="text-left pt-2 pb-2"> '.$gusername.' </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-left pt-2 pb-2">UserID:</td>
-                                                            <td class="text-left pt-2 pb-2"> '.$target.'</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-left pt-2 pb-2">Metode Pembayaran:</td>
-                                                            <td class="text-left pt-2 pb-2"> '.$method[0]['method'].'</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2" class="text-left pt-2 pb-2"> Pastikan data game Anda sudah benar. Kesalahan input data game bukan tanggung jawab kami. </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="text-right">
-                                                    <button class="btn text-white" type="button" data-dismiss="modal">Batal</button>
-                                                    <button class="btn btn-primary" type="submit" name="tombol" value="submit">Bayar Sekarang</button>
-                                                </div>
-                                            </form>
-                                            ',
-                                        ]);
                                     } else {
                                         echo json_encode([
                                             'status' => false,
