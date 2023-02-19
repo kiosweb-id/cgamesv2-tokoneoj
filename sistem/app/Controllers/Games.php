@@ -604,17 +604,61 @@ class Games extends BaseController {
 
                     if ($this->M_Base->u_get('pay_balance') == 'Y') {
 
-                        $find_price = $this->M_Base->data_where_array('price', [
-                            'method_id' => 10001,
-                            'product_id' => $id
-                        ]);
-
-                        $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
-
-                        $price[] = [
-                            'method' => 'balance',
-                            'price' => number_format($custom_price * $quantity,0,',','.'),
-                        ];
+                        if(session('user_id') !== null) {
+                            $level = $this->MLevel->select('level_name')->where('id',$this->MUser->select('level_id')->find(session('user_id'))['level_id'])->first()['level_name'];
+    
+                            if($level == 'Member'){
+    
+                                    $find_price = $this->MPrice->select('price')->where(['method_id' => 10001,'product_id' => $id ])->findAll();
+    
+                                    $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+    
+                                    $price[] = [
+                                        'method' => 'balance',
+                                        'price' => number_format($custom_price * $quantity,0,',','.'),
+                                    ];
+                            } else if ($level == 'Reseller') {
+    
+                                    $find_price = $this->MPrice->select('reseller_price AS price')->where(['method_id' => 10001,'product_id' => $id ])->findAll();
+    
+                                    $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+    
+                                    $price[] = [
+                                        'method' => 'balance',
+                                        'price' => number_format($custom_price * $quantity,0,',','.'),
+                                    ];
+                            } else if ($level == 'VIP') {
+    
+                                    $find_price = $this->MPrice->select('vip_price AS price')->where(['method_id' => 10001,'product_id' => $id ])->findAll();
+    
+                                    $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+    
+                                    $price[] = [
+                                        'method' => 'balance',
+                                        'price' => number_format($custom_price * $quantity,0,',','.'),
+                                    ];
+                            } else {
+    
+                                    $find_price = $this->MPrice->select('price')->where(['method_id' => 10001,'product_id' => $id ])->findAll();
+    
+                                    $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+    
+                                    $price[] = [
+                                        'method' => 'balance',
+                                        'price' => number_format($custom_price * $quantity,0,',','.'),
+                                    ];
+                            }
+                        } else {
+    
+                                $find_price = $this->MPrice->select('price')->where(['method_id' => 10001,'product_id' => $id ])->findAll();
+    
+                                $custom_price = count($find_price) == 1 ? $find_price[0]['price'] : $product[0]['price'];
+    
+                                $price[] = [
+                                    'method' => 'balance',
+                                    'price' => number_format($custom_price * $quantity,0,',','.'),
+                                ];
+                        }
                     }
 
                     echo json_encode($price);
