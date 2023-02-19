@@ -54,7 +54,10 @@
 					                            		<?= $orders['order_id']; ?> <i class="fa fa-clone pl-2 clip" onclick="copy_trx()" data-clipboard-text="<?= $orders['order_id']; ?>"></i>
 					                                </h5>
 					                            </div>
-					                            <div class="pb-4"> Jumlah Pembayaran <h5>Rp. <?= number_format($orders['price'],0,',','.'); ?></h5>
+					                            <div class="pb-4"> Jumlah Pembayaran 
+									<h5>
+										Rp. <?= number_format($orders['price'],0,',','.'); ?> <i class="fa fa-clone pl-2 clip" onclick="copy_price()" data-clipboard-text="<?= $orders['price']; ?>"></i>
+									</h5>
 					                            </div>
 					                            <div class="pb-4"> Rincian Pesanan <h5><?= $orders['games']; ?> - <?= $orders['product']; ?></h5>
 					                                <p>
@@ -102,6 +105,11 @@
 					navigator.clipboard.writeText('<?= $orders['order_id']; ?>');
 
 					Swal.fire('Berhasil', 'No Transaksi berhasil di salin', 'success');
+				}
+				function copy_price() {
+					navigator.clipboard.writeText('<?= $orders['price']; ?>');
+
+					Swal.fire('Berhasil', 'Total Transaksi berhasil di salin', 'success');
 				}
 			</script>
 			<?php $this->endSection(); ?>
