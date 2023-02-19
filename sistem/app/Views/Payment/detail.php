@@ -109,7 +109,7 @@
 				function copy_price() {
 					navigator.clipboard.writeText('<?= $orders['price']; ?>');
 
-					Swal.fire('Berhasil', 'Total Transaksi berhasil di salin', 'success');
+					Swal.fire('Berhasil', 'Jumlah Pembayaran berhasil di salin', 'success');
 				}
 			</script>
 			<?php $this->endSection(); ?>
