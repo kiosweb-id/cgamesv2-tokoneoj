@@ -743,7 +743,6 @@ class Games extends BaseController {
                                 
                                 if (isset($result->result)) {
 
-                                    
                                     if ($result->result->status == 200) {
                                         if(isset($result->error_msg) != null){
                                             echo json_encode([

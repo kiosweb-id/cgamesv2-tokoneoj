@@ -46,8 +46,8 @@ class Sistem extends BaseController {
 					if ($result['data']['status'] == 'Sukses') {
 						$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 	
+						// $ket = $result['data']['message'];
 						$status = 'Success';
-						$ket = $result['data']['message'];
 	
 						$this->M_Base->data_update('orders', [
 							'ket' => $ket,
@@ -141,7 +141,7 @@ class Sistem extends BaseController {
 					if ($result['data']['status'] == 'Sukses') {
 						$ket = $result['data']['sn'] !== '' ? $result['data']['sn'] : $result['data']['message'];
 	
-						$ket = "Transaksi Success";
+						// $ket = "Transaksi Success";
 						$status = 'Success';
 	
 						$this->M_Base->data_update('orders', [
