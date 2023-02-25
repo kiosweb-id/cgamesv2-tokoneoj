@@ -170,6 +170,7 @@ class User extends BaseController {
 
                                     if ($result) {
                                         if ($result['success'] == true) {
+                                            $amount = $amount + (int) $result['data']['fee_customer'];
                                             if (array_key_exists('qr_url', $result['data'])) {
                                                 $payment_code = $result['data']['qr_url'];
                                             } else {
@@ -236,7 +237,7 @@ class User extends BaseController {
                                         
                                         if ($response) {
                                             if ($response['Status'] == 200) {
-                                        
+                                                $amount= $amount+ (int) $response['Data']['Fee'];
                                                 $payment_code = $response['Data']['PaymentNo'];
                                         
                                             } else {
@@ -286,7 +287,7 @@ class User extends BaseController {
                 $data = array_merge($this->base_data, [
                     'menu_active' => 'User',
                     'title' => 'Top Up',
-                    'method' => $this->M_Base->data_where('method', 'status', 'On'),
+                    'method' => $this->M_Base->all_data('method'),
                 ]);
 
                 return view('User/Topup/index', $data);
