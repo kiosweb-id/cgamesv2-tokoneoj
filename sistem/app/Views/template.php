@@ -28,9 +28,9 @@
 
         <style>
             :root {
-                --warna: #38084a;
-                --warna_2: #510b65;
-                --warna_3: #ff9800;
+                --warna: #e97d2b;
+                --warna_2: #1c2028;
+                --warna_3: #f3b357;
                 --warna_4: #141E61;
             }
             .text-end {
